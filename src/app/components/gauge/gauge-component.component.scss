@@ -1,0 +1,43 @@
+.gauge-container{
+    margin-top: 40px;
+    text-align: center;
+    justify-content: center;
+    height: 140px;
+    justify-self: baseline;
+    width: 74%;
+    margin-left: 13%;
+}
+
+
+.gauge-text{
+    position: relative;
+    width: 100%;
+    margin-top: -55px;
+    font-size: 12px !important;
+    border: 0;
+}
+
+.gauge-value{
+    width: 40%;
+    font-size: 12px !important;
+    box-shadow: 0px 0px 0px 0px;
+    text-align: center;
+    border: none !important;
+    border-bottom: 1px solid #1C036F !important;
+    //border: 0.1px solid #000;
+}
+
+.gauge-value::placeholder{
+    color:#333;
+}
+
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none !important; 
+  margin: 0 !important; 
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}

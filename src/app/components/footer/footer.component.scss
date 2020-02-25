@@ -1,0 +1,38 @@
+.footer{
+    height:58px;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    background-color: #21b3ad;
+}
+.vertical-shape{
+    width: 35px;
+    height: 23.5%;
+    left: 20px;
+    bottom: 0px;
+    position: fixed;
+    background-color: #2c00a0;
+}
+
+.footer-button{
+    color:white;
+    background-color: transparent;
+    border:1px solid white;
+    width: auto;
+    font-size: 14px;
+}
+
+.footer-text{
+    color: white;
+    font-size: 10px;
+    font-weight: 300;
+}
+
+.footer-contact{
+    font-size: 13px;
+    color: white;
+}
+
+.contact-container{
+    background-color: #2c00a0;
+}

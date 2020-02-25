@@ -1,0 +1,162 @@
+.credit-card{
+    background-color: #333;
+    border-radius: 10px;
+    height: 95%;
+    padding-left: 25px;
+    width: 70%;
+    color: white;
+    margin-left: -20%;
+    position: relative;
+    p{
+        font-weight: 300;
+        span{
+            font-size: 24px;
+        }
+    }
+    h6{
+        width: 80%;
+        margin-top: 5px;
+        font-weight: 300;
+        span{
+            float: right;
+        }
+    }
+}
+
+.valid-label{
+    font-size: 6px;
+    float: none !important;
+}
+
+.credit-card:hover{
+    opacity: 0.80;
+}
+
+.new-card{
+    background-color: #f4f4f4;
+    button{
+        width: 100%;
+        height: 100%;
+        margin-left: -12.25px;
+    }
+}
+
+
+.card-inputs{
+    width: 100%;
+    margin-top: 10px !important;
+    mat-label{
+        color: rgba(0,0,0,.54);
+        font-size: 12px !important;
+    }
+    input{
+        margin-top: 2.5px;
+        background-color: #e6e7e8;
+        padding-left: 15px;
+        font-size: 12px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        padding-right: 15px !important;
+        border: none;
+        box-shadow: 0;
+        width: 95%;
+    }
+}
+
+.button-outline , .button-primary{
+    width: 100% !important;
+    margin-left: 0%;
+}
+
+.no-hover{
+    cursor: auto;
+}
+
+.no-hover:hover{
+    opacity: 1;
+}
+
+
+mat-grid-tile {
+    background: white;
+}
+
+.date-input{
+    width: 100%;
+    margin-top: 40px !important;
+    font-size: 15.5px !important;    
+    color: rgba(0,0,0,.54);
+    font-weight: 300;
+    input{
+        font-size: 12px !important;
+        margin-top: -2px;
+        background-color: #e6e7e8;
+        padding-left: 15px;
+        font-size: 12px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        padding-right: 15px !important;
+        border: none !important;
+        box-shadow: 0;
+        width: 95%;
+        height: 15px;
+    }
+}
+.date-button{
+    color:#2c00a0;
+    position: absolute;
+    top: -24px;
+    right: -17px;
+}
+
+.date-picker{
+    background-color: yellowgreen;
+}
+
+.uppercase{
+    text-transform: uppercase;
+}
+
+.overlay{
+    background-color: rgba(0,0,0,.54);
+    border-radius: 10px;
+    width: 99%;
+    height: 99%;
+    position: absolute;
+    left: 0.5%;
+    display: grid;
+    justify-content: center;
+    z-index: 1;
+    align-items: center;
+    .button-outline{
+        background-color: #333 !important;
+        color:white !important;
+        border:1.5px solid white !important;
+        width:150px !important;
+        font-size: 14px;
+        font-weight: 400 !important;
+    }
+    .top{
+        align-self: flex-end;
+    }
+    .bottom{
+        align-self: flex-start;
+    }
+}
+
+.default{
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 10px;
+    font-weight: 500 !important;
+    color: #21b3ad;
+}
+
+.input-has-error {
+    border:1px solid red !important;
+}
+
+.div-has-error{
+    border:1px solid red !important;
+}

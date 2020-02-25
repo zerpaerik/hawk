@@ -1,0 +1,51 @@
+<div class="main-content">
+    <div class="content-header">
+        <mat-icon *ngIf="showFilterDetails" (click)="showFilterDetails = false">
+            arrow_back_ios
+        </mat-icon>
+        <h3 *ngIf="!new_report">
+            {{ showFilterDetails ?  filter_selected.name : 'FILTERS LIBRARY'  }}
+        </h3>
+        <h3 *ngIf="new_report"> UPLOAD TEST REPORT </h3>
+        <button *ngIf="!showFilterDetails" mat-stroked-button class="auth-button button-primary"
+            (click)="new_report = !new_report">
+            {{ new_report ? 'CANCEL' : 'UPLOAD PDF TEST REPORT' }}
+        </button>
+    </div>
+    <div class="searchbar-container" *ngIf="!showFilterDetails && !new_report">
+        <mat-icon>search</mat-icon>
+        <input type="text" name="search" [ngModel]="search" (ngModelChange)="search=$event"
+            placeholder="Search for a model filter" [formControl]="searchedWordsControl">
+        <button mat-button class="button-clear tealish accordion-toggle" (click)="_openSearchModal()">
+            Advanced
+        </button>
+    </div>
+    <mat-grid-list cols="12" rowHeight="30px" *ngIf="filters_search_result.length > 0">
+        <mat-grid-tile [colspan]="12">
+            <h6 class="color-secondary text-results">
+                {{ filters_search_result.length }}
+                Results from advanced search &nbsp;
+                <span (click)="clearFiltersFilter()"> (CLEAR SEARCH) </span>
+            </h6>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list [cols]="num_cols" *ngIf="filters.length> 0 && !showFilterDetails && !new_report">
+        <mat-grid-tile *ngFor="let filter of filters" [colspan]="1" [rowspan]="1">
+            <div class="filter-card" (click)="_openFilterDetails(filter)">
+                <img src="{{ filter.picture }}">
+                <h5 appHighlight [searchedWords]="searchedWords$ | async" classToApply="selected-text"
+                    text="{{ filter.name }}"></h5>
+                <h6 appHighlight [searchedWords]="searchedWords$ | async" text="{{ filter.manufacturer.name }}"
+                    classToApply="selected-text">
+                </h6>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <app-filter-details *ngIf="showFilterDetails" [filter]="filter_selected">
+    </app-filter-details>
+
+    <app-report-file-dropper *ngIf="new_report" (done)="new_report = false">
+    </app-report-file-dropper>
+</div>

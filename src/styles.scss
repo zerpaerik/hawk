@@ -1,0 +1,711 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {  }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-raised-button, .mat-flat-button, .mat-stroked-button {
+    border-radius: 0px !important;
+    background-color: #e8e8e8;
+    width: 140px;
+}
+
+.mat-fab.mat-primary, .mat-flat-button.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+    background-color: #3f51b5;
+}
+
+input:focus {outline:none;}
+
+button:focus {
+    border: none;
+    outline: none;
+}
+
+button{
+    cursor: pointer;
+}
+
+.base-input{
+    height: 35px !important;
+    background-color: #ededed !important; 
+    font-size: 13px !important;
+    color:grey !important;
+    padding-left: 15px !important;
+    border: none !important;
+}
+
+.button-primary{
+    background-color: #21b3ad;
+    color: white;
+    border: none;
+    height: 35px;
+    font-weight: 500;
+}
+
+.button-outline{
+    color: #21b3ad;
+    background-color: white;
+    border: 1.5px solid #21b3ad !important;
+    height: 35px;
+    font-weight: 500;
+}
+
+.button-clear{
+    color: #21b3ad;
+    background-color: transparent;
+    border: none;
+    height: 35px;
+    font-weight: 500;
+}
+
+.link{
+    font-size: 11.5px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.auth-content, .main-content{
+    background-color: #e9e9e9;
+    width: 100%;
+    height: calc(100vh - 50px);
+    //margin-top: 60px;
+    display: grid;
+    align-items: center;
+}
+
+.main-content{
+    height: auto;
+    margin-top: 60px;
+}
+
+.auth-card{
+  justify-self: center;
+  width: 430px;
+  height: 70%;
+  max-width: 444px;
+  border-radius: 27px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  background-color: #ffffff;
+  position: relative;
+  text-align: center;
+  img{
+      border-top-left-radius: 27px;
+      border-top-right-radius: 27px;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      height: 38%;
+      width: 100%;
+  }
+  .auth-form{
+      margin-top: 55%;
+      h3{
+          color:#2c00a0;
+
+      }
+      .footer-comment{
+          font-size: 11.5px;
+          width: 100%;
+          text-align: center;
+          span{
+              color: #21b3ad;
+              cursor: pointer;
+          }
+      }
+      .link{
+          text-align: right;
+          margin-top: 4px;
+          font-size: 10px;
+          width: calc(60% + 5px);
+          padding-right: 0px;
+          margin-right: 0px;
+          margin-left: 20%;
+      }
+      input{
+          width: 60%;
+      }
+      .auth-button{
+          margin-top: 10px;
+          width: calc(60% + 15px);
+      }
+      
+  }
+}
+
+.input-password{
+    button{
+        position: absolute;
+        right: 19%;
+        background-color: transparent;
+        width: 35px !important;
+        height: 35px;
+        margin: 0px;
+        padding: 0px;
+        border-radius: 0px;
+        .material-icons{
+            margin: 0px;
+            margin-top: -3px;
+            padding: 0px;
+            font-size: 18px;
+            color:#666;
+        }
+    }
+}
+
+.div-error{
+    border: 1px solid #cb0c0c;
+}
+
+
+.mat-error{
+    color: #ca0d00;
+    position: absolute;
+    //left: 20%;
+    font-size: 10px;
+    margin-top: 4px;
+    margin-bottom: -15px;
+}
+
+.divider{
+    margin-bottom: 5px;
+}
+
+.mat-checkbox-layout .mat-checkbox-label {
+    line-height: 24px;
+    font-size: 12px !important;
+    font-weight: 600;
+}
+
+.mat-checkbox-inner-container {
+    display: inline-block;
+    height: 14px !important;
+    line-height: 0;
+    margin: auto;
+    margin-right: 8px;
+    order: 0;
+    position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 14px !important;
+    flex-shrink: 0;
+    border-radius: 0px;
+}
+
+.mat-checkbox-frame {
+    background-color: transparent;
+    transition: border-color 90ms cubic-bezier(0,0,.2,.1);
+    border-width: 1px !important;
+    border-style: solid;
+}
+
+.mat-checkbox-background, .mat-checkbox-frame {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    border-radius: 0px !important;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.searchbar-container{
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 15px;
+    height: 35px;
+    input{
+        border: none;
+        font-size: 11px;
+        width: 90%;
+        margin-left: 30px;
+    }
+    .mat-icon{
+        position: absolute;
+        left: 40px;
+        transform: rotate(90deg);
+    }
+    button{
+        font-size: 12px;
+        border-radius: 20px;
+        background-color: #fcfcfc;
+    }
+
+}
+
+.expand{
+    height: auto !important;
+    padding-bottom: 40px !important;
+}
+
+//COLORS
+
+.white{
+    color: white;
+}
+.tealish{
+    color:#21b3ad
+}
+
+.input-error{
+    border:1px solid #cb0c0c !important;
+    background-color: #f3f3f3 !important;
+    color: #cb0c0c !important;
+}
+
+.input-disabled{
+    background-color: #ddd !important;
+    color: #999 !important;
+}
+
+.input-disabled:hover{
+    cursor: not-allowed;
+}
+
+
+.color-secondary{
+    color: #2c00a0 !important;
+}
+
+.color-primary{
+    color: #21b3ad !important;
+}
+
+.color-danger{
+    color: #ca0d00;
+}
+
+.color-success{
+    color: #008d42;
+}
+
+.color-third{
+    color: #9933ff;
+}
+
+.color-disabled{
+    color: #aaa !important;
+}
+
+.bg-primary{
+    background-color: #21b3ad !important;
+}
+
+@media screen and (max-width: 980px) and (min-width: 866px){
+    .case-card , .filter-card{
+        width: 90% !important;
+        height: 90% !important;
+    }
+}
+
+@media screen and (max-width: 866px) and (min-width: 600px){
+    .case-card{
+        width: 95% !important;
+        height: 85% !important;
+        button{
+            //height: 0px !important;
+        }
+        img{
+            width: 120px !important;
+            height: 120px !important;
+        }
+    }
+    .filter-card{
+        img{
+            width: 160px !important;
+            height: 160px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 490px) and (min-width: 600px){
+    .case-card , .filter-card{
+        img{
+            width: 115px !important;
+            height: 115px !important;
+        }
+    }
+}
+
+
+
+@media screen and (min-width: 270px) and (max-width: 490px){
+    mat-grid-title{
+        width: 80% !important;
+        margin-left: 10% !important;
+    }
+    .case-card{
+        width: 95% !important;
+        height: 85% !important;
+        img{
+            width: 100px !important;
+            height: 100px !important;
+        }
+        button{
+            //height: 0px !important;
+        }
+    }
+    .filter-card{
+        img{
+            width: 170px !important;
+            height: 170px !important;
+        }
+    }
+}
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #21b3ad;
+}
+
+.label-error{
+    color:#ca0d00;
+    font-size: 11px;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 0px !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 0.3375em 0 !important;
+}
+
+.mat-form-field-type-mat-native-select .mat-form-field-infix::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent !important;
+    border-right: 4px solid transparent !important;
+    border-top: 5px solid !important;
+    position: absolute;
+    top: 50%;
+    right: 12.5% !important;
+    margin-top: -2.5px;
+    pointer-events: none;
+}
+
+.input-currency {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="30"><text x="75%" y="21" fill="dimgrey" style="font: 10px Arial">$</text></svg>') no-repeat !important;
+    border: none;
+    font: 9px "Arial";
+    padding-right: 20px !important;
+}
+
+.input-airflow {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="30"><text x="80%" y="21" fill="dimgrey" style="font: 10px Arial">cfm</text></svg>') no-repeat !important;
+    border: none;
+    font: 9px "Arial";
+    padding-right: 20px !important;
+    background-color: #e6e7e8 !important;
+}
+
+.input-dp {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="30"><text x="85%" y="21" fill="dimgrey" style="font: 10px Arial">inch of H2O</text></svg>') no-repeat !important;
+    border: none;
+    font: 9px "Arial";
+    padding-right: 20px !important;
+    background-color: #e6e7e8 !important;
+}
+
+.input-energy {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="30"><text x="70%" y="21" fill="dimgrey" style="font: 10px Arial">$/kw-h</text></svg>') no-repeat !important;
+    border: none;
+    font: 9px "Arial";
+    padding-right: 20px !important;
+    background-color: #e6e7e8 !important;
+}
+
+.input-co2 {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="30"><text x="65%" y="21" fill="dimgrey" style="font: 10px Arial">Lbs/kw-h</text></svg>') no-repeat !important;
+    border: none;
+    font: 9px "Arial";
+    padding-right: 20px !important;
+    background-color: #e6e7e8 !important;
+}
+
+
+.mat-dialog-container{
+    position: relative;
+}
+
+
+.mat-pseudo-checkbox {
+    width: 14px !important;
+    height: 14px !important;
+    border: 1px solid !important;
+    border-radius: 0px !important;
+}
+
+
+.error-message{
+    color: #cb0c0c;
+    font-size: 10px;
+    margin: 0px;
+    width: 100%;
+    text-align: center;
+}
+
+.owl-prev{
+    background-color:transparent !important;
+    color: #333 !important;
+    font-size: 18px !important;
+}
+
+.owl-next{
+    border-radius: 50%;
+    background-color:transparent !important;
+    color: #333 !important;
+    font-size: 18px !important;
+}
+
+.owl-prev:hover,
+.owl-next:hover{
+    color: #999 !important;
+}
+.owl-item{
+    padding-top: 10px;
+    //background-color: white;
+    text-align: center;
+    border-radius: 10px !important; 
+    cursor: pointer;
+    div{
+        border-radius: 10px;
+    }
+    div:hover{
+        background-color: #fafafa;
+    }
+    p{
+        color: #2c00a0 !important;
+        margin: 0;
+        font-size: 12px;
+    }
+    h6{
+        font-size: 11px;
+        font-weight: 400;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        color: #666;
+    }
+    img{
+        //margin-left: 27% !important;
+        width: 100px !important;
+        height: 100px !important;
+        margin-left: calc(50% - 50px) !important;
+    }
+}
+
+
+
+.owl-theme{
+    //background-color: white ;
+}
+
+.owl-nav {
+    margin-top: 0px !important;
+}
+
+
+.case-card{
+    height: 86%;
+    width: 96%;
+    border-radius: 8px;
+    box-shadow: 0 2px 3px 0 rgba(173, 173, 173, 0.5);
+    background-color: #ffffff;
+    text-align: center;
+    position: relative;
+    display: grid;
+    justify-content: center;
+    padding-top: 20px;
+    p{
+        font-size: 10px;
+    }
+    img{
+        width: 100px;
+        height: 100px;
+        justify-self: center;
+    }
+    h5{
+        color:#2c00a0;
+        font-size: 11px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    h6{
+        font-size: 10px;
+        font-weight: 300;
+        margin-top: 0px;
+    }
+    button{
+        color:#21b3ad;
+        font-size: 10px;
+        font-weight: 400;
+    }
+    .more{
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        color:#000;
+        .mat-icon{
+            font-size: 24px;
+        }
+    }
+}
+
+.form{
+    width: 95%;
+    height: 100%;
+}
+
+
+.mat-dialog-container{
+    padding: 15px !important;
+}
+
+.mat-select-arrow {
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent !important;
+    border-right: 3px solid transparent !important;
+    border-top: 4px solid !important;
+    margin: 0 10px !important;
+}
+
+.mat-radio-outer-circle {
+    box-sizing: border-box;
+    height: 15px !important;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: border-color ease 280ms;
+    width: 15px !important;
+    border-width: 1px !important;
+    border-style: solid;
+    border-radius: 50%;
+}
+
+.mat-radio-container {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    width: 12px !important;
+    height: 16px !important;
+    flex-shrink: 0;
+}
+
+.mat-radio-inner-circle {
+    border-radius: 50%;
+    box-sizing: border-box;
+    height: 15px !important;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: transform ease 280ms,background-color ease 280ms;
+    width: 15px !important;
+    transform: scale(.001);
+}
+
+.radio-option{
+    font-size: 12px;
+    padding-left: 15px !important;
+}
+
+.mat-form-field-label-wrapper {
+    top: -.74375em !important;
+    padding-top: .84375em;
+}
+
+input.input-number::-webkit-outer-spin-button,
+input.input-number::-webkit-inner-spin-button {
+  display: none !important;
+}
+
+input.input-number {
+  -moz-appearance: textfield !important; 
+}
+
+
+
+.more-costs{
+    position: absolute !important;
+    right: 0 !important;
+    width: 20% !important;
+    background-color: #2c00a0;
+    border: none !important;
+    color: white;
+    mat-icon{
+        font-size: 14px;
+        padding-top: 7px;
+    }
+}
+
+.input-additional{
+    width: 60%;
+    width: 60%;
+    background-color: #f6f7f8 !important;
+    border:1px solid #ccc
+}
+
+.tile-top{
+    display: block;
+    position: absolute;
+    top: 30px;
+}
+
+  
+.filter-info {
+    display: block !important;
+    width: 90%;
+    height: 70%;
+    text-align: left;
+    h3{
+        margin-top: 0px;
+        font-size: 16px;
+        color:#2c00a0;
+    }
+    h5{
+        font-size: 12px;
+        margin: 0px;
+        font-weight: 300;
+        color:#2c00a0;
+        span{
+            float: right;
+            font-weight: 500;
+        }
+    }
+    h6{
+        font-size: 10px;
+        margin: 0px;
+        font-weight: 300;
+    }
+}
+
+
+//COST TABLE
+.table-header{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.table-content{
+    font-size: 11px;
+    background-color: #f7f7f7;
+}
+
+.text-left {
+    justify-content: flex-start !important ;
+    align-items: flex-start !important;
+    p{
+        width: 100%;
+        font-size: 11px !important;
+    }
+}
+
+.header-top{
+    background-color: #e7e8e9;
+}
+
+.text-bold{
+    font-weight: 500 !important;
+}

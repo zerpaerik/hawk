@@ -1,0 +1,211 @@
+<div class="main-content">
+    <div class="content-header">
+        <mat-icon (click)="_backToCaseList()">arrow_back_ios</mat-icon>
+        <h3> OPTIMIZATION RESULTS </h3>
+        <button *ngIf="!new_case" mat-stroked-button class="color-primary button-clear" (click)="_previewPdf()">
+            <mat-icon> local_printshop</mat-icon>
+        </button>
+    </div>
+
+    <mat-grid-list cols="12" rowHeight="655px" *ngIf="case_data.name">
+        <mat-grid-tile class="case-section" [colspan]="5">
+            <mat-card class="section-card no-margin" style="height:620px !important;">
+                <div class="case-information">
+                    <h6> {{ case_data.name }} </h6>
+                    <p> Using
+                        <span>
+                            {{ case_data.model_filter_name }}
+                            {{ case_data.current_filter.model_filter.size_height }} x
+                            {{ case_data.current_filter.model_filter.size_width }}
+                        </span>
+                    </p>
+                </div>
+                <app-pie-chart *ngIf="case_data.savings_percent && type_savings_chart == 'pie'"
+                    [size]="null"
+                    [current_cost]="case_data.current_filter.change_rate_annual_cost" 
+                    [optimal_cost]="case_data.current_filter.optimize_change_rate_annual_cost"
+                    [savings]="case_data.savings">
+                </app-pie-chart>
+                <app-bar-chart *ngIf="case_data.savings_percent && type_savings_chart == 'bar' && selected_data"
+                    [chart_id]="'bar_chart1'"
+                    [current_cost]="case_data.current_filter.change_rate_annual_cost"
+                    [optimized_cost]="case_data.current_filter.optimize_change_rate_annual_cost"
+                    [selected_cost]="selected_data.annual_cost">
+                </app-bar-chart>
+                <div class="savings" *ngIf="case_data.savings_percent">
+                    <button mat-stroked-button class="button-clear"
+                        [class.color-secondary]="type_savings_chart == 'pie'" (click)="type_savings_chart = 'pie'">
+                        <mat-icon>donut_large</mat-icon>
+                    </button>
+                    <button mat-stroked-button class="button-clear"
+                        [class.color-secondary]="type_savings_chart == 'bar'" (click)="type_savings_chart = 'bar'">
+                        <mat-icon>bar_chart</mat-icon>
+                    </button>
+                    <br>
+                    SAVING VS CURRENT ({{ case_data.savings_percent.toFixed(2) | number }} %) &nbsp;
+                    <span>$ {{ case_data.savings.toFixed(2) | number }} </span>
+                </div>
+                <mat-grid-list cols="12" class="indicators-container">
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                        <div class="indicator optimized"></div>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                        <div class="indicator current"></div>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                        <div class="indicator selected"></div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <mat-grid-list cols="12">
+                    <mat-grid-tile [colspan]="3" class="table-header">
+
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header header-top">
+                        OPTIMIZED
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header header-top">
+                        CURRENT
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header header-top">
+                        SELECTED
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="12" *ngIf="selected_data">
+                    <mat-grid-tile [colspan]="3" class="table-header text-left">
+                        <p>CHANGE OUT TIME</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        Every {{ case_data.current_filter.optimize_change_rate_cycle_time.toFixed(2) }} months
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        Every {{ case_data.current_filter.change_rate_cycle_time.toFixed(2) }} months
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        Every &nbsp;
+                        <span *ngIf="type_of_chart == 2"> {{ selected_data.change_out_time.toFixed(2) }} </span>
+                        <span *ngIf="type_of_chart == 1"> {{ selected_data.time.toFixed(2) }} </span>
+                        &nbsp; months
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="12" *ngIf="selected_data">
+                    <mat-grid-tile [colspan]="3" class="table-header text-left">
+                        <p>FINAL DROP PRESSURE</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        {{ case_data.current_filter.optimize_change_rate_dp.toFixed(2) }} inch of WC
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        {{ case_data.current_filter.change_rate_dp.toFixed(2) }} inch of WC
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        <span *ngIf="type_of_chart == 2">{{ selected_data.change_out_pressure_drop.toFixed(2) }} inch of
+                            WC </span>
+                        <span *ngIf="type_of_chart == 1"> {{ selected_data.drop_pressure.toFixed(2) }} inch of WC
+                        </span>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="12" *ngIf="selected_data">
+                    <mat-grid-tile [colspan]="3" class="table-header text-left">
+                        <p>TOTAL ANNUAL CO2 EMMISSIONS</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        {{ case_data.current_filter.optimize_co2_lb_year.toFixed(2) }} lbs
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        {{ case_data.current_filter.co2_lb_year.toFixed(2) }} lbs
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        <span *ngIf="type_of_chart == 2">{{ selected_data.CO2_emissions.toFixed(2) }} lbs </span>
+                        <span *ngIf="type_of_chart == 1"> -- </span>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="12" *ngIf="selected_data">
+                    <mat-grid-tile [colspan]="3" class="table-header text-left">
+                        <p>TOTAL COST</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        $ {{ case_data.current_filter.optimize_change_rate_annual_cost.toFixed(2) }}
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        $ {{ case_data.current_filter.change_rate_annual_cost.toFixed(2) }}
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        <span *ngIf="type_of_chart == 2"> $ {{ selected_data.annual_cost.toFixed(2) }} </span>
+                        <span *ngIf="type_of_chart == 1"> -- </span>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile class="case-section" [colspan]="7">
+            <mat-card class="section-card" style="height: 620px !important;">
+                <div class="case-information">
+                    <h6> OPTIMIZATION VIEW </h6>
+                    <p> Move the circle on the bar to change selected values
+                    </p>
+                </div>
+
+                <div class="range-container">
+                    <div class="range-panel">
+                        <h6 *ngIf="selected_data && type_of_chart==1"> {{ selected_data.time.toFixed(2) }} months </h6>
+                        <h6 *ngIf="selected_data && type_of_chart==2"> {{ selected_data.change_out_time.toFixed(2) }}
+                            months </h6>
+                        <input *ngIf="type_of_chart == 1 && dp_vs_time_data !== null" [(ngModel)]="range_value"
+                            (ngModelChange)="_setRange()" class="range round" type="range" min="0"
+                            max="{{ range_limit }}" step="1">
+                        <input *ngIf="type_of_chart == 2 && cost_vs_time_data !== null" [(ngModel)]="range_value"
+                            (ngModelChange)="_setCostRange()" class="range round" type="range" min="0"
+                            max="{{ range_limit }}" step="1">
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <app-chart-dp-vs-time *ngIf="type_of_chart == 1 && dp_vs_time_data !== null"
+                    [chart_data]="dp_vs_time_data" [chart_id]="'chart2'" [selected_values]="selected_data"
+                    [limit_dp]="limit_dp">
+                </app-chart-dp-vs-time>
+                <app-chart-cost-vs-time *ngIf="type_of_chart == 2 && cost_vs_time_data !== null" [chart_id]="'chart4'"
+                    [chart_data]="cost_vs_time_data" [selected_values]="selected_data" [scale]="null"
+                    [limit_dp]="limit_dp">
+                </app-chart-cost-vs-time>
+
+                <mat-grid-list cols="12" class="chart-type-buttons">
+                    <mat-grid-tile [colspan]="2" class="table-header">
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" class="table-header" [class.type-chart-highlight]="type_of_chart == 1">
+                        <div class="type-chart-container" (click)="_changeTypeOfChart(1)">
+                            Dp vs Time
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" class="table-header" [class.type-chart-highlight]="type_of_chart == 2">
+                        <div class="type-chart-container" (click)="_changeTypeOfChart(2)">
+                            Cost vs Time
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" class="table-header">
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-card>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+    <mat-grid-list cols="12">
+        <mat-grid-tile [colspan]="4">
+            <button mat-stroked-button class="button-outline" (click)="_backToCaseList()">BACK TO CASE LIST</button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4">
+            <button mat-stroked-button class="button-primary">COMPARE</button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4">
+            <button mat-stroked-button class="button-primary" (click)="_startNewCase()">NEW CASE</button>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

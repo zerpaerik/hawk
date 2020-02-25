@@ -1,0 +1,69 @@
+<div class="modal-header">
+    <p> Additional costs per set per cycle </p>
+    <button mat-icon-button>
+        <mat-icon class="white" (click)="cancel()">cancel</mat-icon>
+    </button>
+</div>
+<div class="modal-content">
+    <mat-grid-list *ngFor="let cost of array_costs; let i = index" cols="12" rowHeight="72px">
+        <mat-grid-tile [colspan]="2">
+            <div class="position">
+                {{ i + 1 }}
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="5">
+            <div class="input-container">
+                <mat-label class="input-label">COST NAME OR DESCRIPTION</mat-label>
+                <input 
+                    matInput  
+                    class="base-input"
+                    [class.input-disabled]="((data.type == 'cycle') && (i == 0 || i == 1 || i == 2))" 
+                    [(ngModel)]="cost.name"
+                    (ngModelChange)="invalid_costs = false" 
+                    [disabled]="((data.type == 'cycle') && (i == 0 || i == 1 || i == 2))">
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4">
+            <div class="input-container">
+                <mat-label class="input-label">COST VALUE</mat-label>
+                <input 
+                    matInput 
+                    class="base-input input-number" 
+                    type="number"
+                    (blur)="setAmountDecimal($event)"
+                    [(ngModel)]="cost.value" 
+                    (ngModelChange)="invalid_costs = false">
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+            <div class="input-container">
+                <button 
+                    *ngIf="data.type == 'cycle'"
+                    class="color-primary" 
+                    [class.color-disabled]="i == 0 || i == 1 || i == 2"
+                    mat-icon-button 
+                    [disabled]="i == 0 || i == 1 || i == 2"
+                    (click)="deleteCostRow(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button 
+                    *ngIf="data.type == 'annual'"
+                    class="color-primary" 
+                    [class.color-disabled]="i == 0"
+                    mat-icon-button 
+                    [disabled]="i == 0"
+                    (click)="deleteCostRow(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <button class="button-clear" (click)="newCostRow()">
+        ADD NEW COST
+    </button>
+    <br>
+    <p *ngIf="invalid_costs" class="error-message" style="margin-bottom: 10px;"> Costs name or description can not be empty </p>
+    <button class="button-primary" (click)="done()">
+        DONE
+    </button>
+</div>

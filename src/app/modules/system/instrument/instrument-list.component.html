@@ -1,0 +1,70 @@
+<div class="main-content">
+  <div class="content-header">
+      <mat-icon *ngIf="showInstrument" (click)="showInstrument = false">
+          arrow_back_ios
+      </mat-icon>
+      <h3 *ngIf="!new_report">
+          {{ showInstrument ?  filter_selected.name : 'MY INSTRUMENTS'  }}
+      </h3>
+
+  </div>
+
+  <div class="searchbar-container" *ngIf="!showInstrument && !new_report">
+    <mat-icon>search</mat-icon>
+    <input type="text" name="search" [ngModel]="search" (ngModelChange)="search=$event"
+        placeholder="Search for instruments" [formControl]="searchedWordsControl">
+
+</div>
+
+
+  <table mat-table [dataSource]="instrument" class="mat-elevation-z8">
+
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef><h4>ID</h4></th>
+      <td mat-cell *matCellDef="let element"> {{ element.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="serial_number">
+      <th mat-header-cell *matHeaderCellDef><h4>SERIAL</h4></th>
+      <td mat-cell *matCellDef="let element"> {{ element.serial_number }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef><h4>NAME</h4></th>
+      <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="unit">
+      <th mat-header-cell *matHeaderCellDef><h4>UNIT</h4></th>
+      <td mat-cell *matCellDef="let element">  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef><h4>TYPE</h4></th>
+      <td mat-cell *matCellDef="let element">  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef><h4>STATUS</h4></th>
+      <td mat-cell *matCellDef="let element">  </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <br>
+    <mat-divider></mat-divider>
+    <mat-grid-list cols="2" rowHeight="70px" class="actions">
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <button mat-stroked-button class="button-outline">COMPARE WITH</button>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <button mat-stroked-button class="button-primary" (click)="_startNewCase()">
+              {{ 'START NEW CASE' }}
+          </button>
+      </mat-grid-tile>
+  </mat-grid-list>
+
+
+</div>

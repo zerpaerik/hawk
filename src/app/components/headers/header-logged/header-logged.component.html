@@ -1,0 +1,60 @@
+<div class="header-logged">
+    <div class="header-actions">
+        <mat-grid-list cols = "11" rowHeight = "50px">
+            <mat-grid-tile
+            [colspan] = "3"
+            [rowspan] = "1">
+                <img src="../../../../assets/imgs/logo-home.png" (click)="_goHome()">
+            </mat-grid-tile>
+            <mat-grid-tile
+            [class.tab-active]="link_active.split('?')[0] == 'case-list'"
+            [colspan] = "1"
+            [rowspan] = "1">
+                <button mat-stroked-button class="button-clear white"
+                [class.tealish]="link_active.split('?')[0] == 'case-list'" (click)="_goCases()">OPTIMIZE</button>
+            </mat-grid-tile>
+            <mat-grid-tile
+            [class.tab-active]="link_active == 'comparisons-list'"
+            [colspan] = "1"
+            [rowspan] = "1">
+                <button mat-stroked-button class="button-clear white" [class.tealish]="link_active == 'comparisons-list'"  (click)="_goCompares()">COMPARING</button>
+            </mat-grid-tile>
+            <mat-grid-tile
+            class="col-contact"
+            [class.tab-active]="link_active == 'filter-list'"
+            [colspan] = "1"
+            [rowspan] = "1">
+                <button mat-stroked-button class="button-clear white" [class.tealish]="link_active == 'filter-list'" (click)="_goFilters()">
+                    FILTERS
+                </button>
+            </mat-grid-tile>
+            <mat-grid-tile
+            class="col-contact"
+            [class.tab-active]="link_active == 'loginsonicu'"
+            [colspan] = "1"
+            [rowspan] = "1">
+                <button mat-stroked-button class="button-clear white" [class.tealish]="link_active == 'instrument-list'" (click)="_goInstrument()">
+                    INSTRUMENTS
+                </button>
+            </mat-grid-tile>
+            <mat-grid-tile
+            [class.tab-active]="link_active == 'profile'"
+            class="col-contact"
+            [colspan] = "2"
+            [rowspan] = "1">
+                <button mat-stroked-button class="button-clear white"  [class.tealish]="link_active == 'profile'"  [matMenuTriggerFor]="menu">PROFILE</button>
+            </mat-grid-tile>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="_logOut()">
+                    <span>LOG OUT</span>
+                </button>
+                <button [disabled]="user_confirmed" mat-menu-item (click)="_confirmEmail()">
+                    <span>CONFIRM EMAIL</span>
+                </button>
+                <button mat-menu-item (click)="_openProfileSettings()">
+                    <span>SETTINGS</span>
+                </button>
+            </mat-menu>
+        </mat-grid-list>
+    </div>
+</div>

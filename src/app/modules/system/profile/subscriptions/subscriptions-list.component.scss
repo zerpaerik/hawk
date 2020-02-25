@@ -1,0 +1,37 @@
+.no-plans{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    p{
+        font-size: 12px;
+        align-self: flex-end;
+    }
+    button{
+        width: 100%;
+        font-size: 13px;
+        align-self: flex-start;
+    }
+}
+
+
+.plans-container{
+    position: relative;
+    h6{
+        margin-bottom: 0px;
+        text-transform: uppercase;
+    }
+    mat-label{
+        font-size: 12px;
+    }
+    p{
+        font-size: 10px;
+        margin-top: 0px;
+    }
+    button{
+        width: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 12px;
+    }
+}

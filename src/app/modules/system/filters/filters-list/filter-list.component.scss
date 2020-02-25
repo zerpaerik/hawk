@@ -1,0 +1,168 @@
+.main-content{
+    padding-left: 25px;
+    padding-right: 25px;
+    width: auto;
+    display: block;
+}
+
+.filter-card{
+    height:80%;
+    border-radius: 8px;
+    box-shadow: 0 2px 3px 0 rgba(173, 173, 173, 0.5);
+    background-color: #ffffff;
+    text-align: center;
+    width: 90%;
+    cursor: pointer;
+    display: grid;
+    padding-bottom: 5px;
+    justify-content: center;
+    p{
+        font-size: 10px;
+    }
+    img{
+        width: 100px;
+        height: 100px;
+        justify-self: center;
+        margin-bottom: 5px;
+        align-self: end;
+    }
+    h5{
+        color:#2c00a0;
+        font-size: 11px;
+        font-weight: 400;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 90%;
+        margin-left: 5%;
+        background-color: transparent;
+    }
+    h6{
+        font-size: 10px;
+        font-weight: 300;
+        margin-top: 0px;
+        background-color: transparent;
+        margin-bottom: 5px;
+    }
+    button{
+        color:#21b3ad;
+        font-size: 10px;
+        font-weight: 400;
+    }
+    .more{
+        position: absolute;
+        top: 22px;
+        right: 14px;
+        color:#000;
+        .mat-icon{
+            font-size: 24px;
+        }
+    }
+}
+
+button.mat-menu-item {
+    width: 100%;
+    height: 30px;
+    font-size: 11px;
+    line-height: 0px;
+}
+
+.content-header{
+    width: 100%;
+    height: 60px;
+    display: inline-flex;
+    align-items: center;
+    button{
+        position: absolute;
+        right: 25px;
+        height: 35px;
+        width: auto;
+    }
+    h3{
+        color:#2c00a0;
+    }
+    mat-icon{
+        color:#333;
+        cursor: pointer;
+    }
+    mat-icon:hover{
+        color:#555
+    }
+}
+
+.filter-card:hover{
+    background-color: #fafafa;
+}
+
+
+.accordion-content{
+    -webkit-transition: max-height 1s; 
+    -moz-transition: max-height 1s; 
+    -ms-transition: max-height 1s; 
+    -o-transition: max-height 1s; 
+    transition: height 1s;  
+    background: #fff;
+    overflow: hidden;
+    margin-top: 2px;
+    // "height: 0" not work with css transitions
+    height: 0;
+  }
+  
+.accordion-inner{
+    padding: 0 15px;
+}
+
+
+.accordion-toggle{
+    -webkit-transition: background .1s linear;   
+    -moz-transition: background .1s linear;   
+    -ms-transition: background .1s linear;   
+    -o-transition: background .1s linear;   
+    transition: background .1s linear;  
+    border-radius: 20px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    position: absolute;
+    right: 25px;
+}
+
+
+.text-results{
+    width: calc(90% + 15px);
+    text-align: right;
+    font-weight: normal;
+    margin-top: 10px;
+    span{
+        float: right;
+        font-size: 9px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+}
+
+.no-results{
+    h3{
+        font-weight: 400;
+        margin-bottom: 0px;
+    }
+    h6{
+        font-weight: 300;
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+    button{
+        border: none !important;
+        padding: 0px !important;
+        font-size: 12px !important;
+    }
+}
+
+::ng-deep .selected-text {
+    color: #2c00a0 !important;
+    // background-color:rgba(36, 182, 177, 0.555) !important;
+    background-color: yellow !important;
+    font-weight: 500 !important; 
+}

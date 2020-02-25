@@ -1,0 +1,35 @@
+.terms{
+    max-width: 70%;
+    overflow-y: scroll;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    h3{
+        color:#2c00a0;
+    }
+    p{
+        margin-left: 5%;
+        font-size: 11px;
+        width: 90%;
+        color:333;
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+    border-radius: 8px;
+    height: 100px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); 
+}
+
+.button-clear{
+    font-size: 11px;
+    border: none !important;
+}

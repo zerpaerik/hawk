@@ -1,0 +1,10 @@
+<h5 class="color-secondary"> SUBSCRIPTIONS PLANS </h5>
+<div class="plans-container" *ngFor="let plan of plans">
+    <h6 class="color-secondary"> {{ plan.name }} </h6>
+    <mat-label class="color-secondary"> COST </mat-label>
+    <p> $ {{ (plan.cost / 100).toFixed(2) | number }} </p>
+    <mat-label class="color-secondary"> DESCRIPTION </mat-label>
+    <p> {{ plan.description }} </p>
+    <button mat-stroked-button class="button-primary" (click)="_openPaymentModalDialog(plan)">SUBSCRIBE TO THIS PLAN</button>
+    <mat-divider></mat-divider>
+</div>

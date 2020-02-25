@@ -1,0 +1,44 @@
+<br><br>
+<div class="filter-details">
+    <button mat-button class="button-clear" (click)="showFilterReports = !showFilterReports">
+        {{ showFilterReports ? 'HIDE LAB REPORTS'  : 'VIEW LAB REPORTS' }}
+    </button>
+    <mat-grid-list cols="2" style="height: auto;">
+        <mat-grid-tile class="filter-img" [colspan]="1" [rowspan]="1">
+            <img src="{{ filter.picture }}">
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <div class="filter-info">
+                <h3> {{ filter.short_name }} </h3>
+                <h5> EFFICIENCY </h5>
+                <h6> {{ filter.efficiency }} % </h6><br>
+                <h5> MANUFACTURER </h5>
+                <h6> {{ filter.manufacturer.name }} </h6><br>
+                <h5> FRAME MATERIAL </h5>
+                <h6> {{ filter.frame_material }} </h6><br>
+                <h5> FRAME TYPE </h5>
+                <h6> {{ filter.frame_type }} </h6><br>
+                <h5> MEDIA TYPE </h5>
+                <h6> {{ filter.media_type }} </h6><br>
+                <h5> PART NUMBER </h5>
+                <h6> {{ filter.part_number }} </h6><br>
+                <h5> NOMINAL SIZE </h5>
+                <h6> {{ filter.size_width }} x {{ filter.size_height }} x {{ filter.size_depth }} </h6>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <mat-divider *ngIf="showFilterReports"></mat-divider>
+    <app-filter-test-reports *ngIf="showFilterReports" [reports]="filter.reports"></app-filter-test-reports>
+    <br>
+    <mat-divider></mat-divider>
+    <mat-grid-list cols="2" rowHeight="70px" class="actions">
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <button mat-stroked-button class="button-outline">COMPARE WITH</button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <button mat-stroked-button class="button-primary" (click)="_startNewCase()">
+                {{ existing_case ? 'CONTINUE WITH MY CASE' : 'START NEW CASE' }}
+            </button>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

@@ -1,0 +1,137 @@
+.case-input{
+    width: 100%;
+    mat-label{
+        color: rgba(0,0,0,.54);
+        font-size: 10px !important;
+        margin-top: 20px;
+    }
+    input{
+        margin-top: 5px;
+        background-color: #e6e7e8;
+        padding-left: 10px;
+        font-size: 12px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border: none;
+        width: calc(100% - 10px);
+    }
+}
+
+
+.mat-list-item{
+    margin-top: 15px !important;
+    padding-left: 0px !important;
+}
+.field-list{
+    padding: 0px !important;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.input-select{
+    width: 100% !important;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    .mat-label{
+        font-size: 12px;
+    }
+}
+
+.select-label {
+    font-size: 14px !important;
+}
+
+.field-select{
+    width: 100%;
+    padding-bottom: 0px !important;
+    height: 55px !important;
+}
+
+.mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+}
+
+.item{
+    margin-left: -15px !important;
+    display: block !important;
+}
+
+.first-item{
+    margin-top: 0px !important;
+}
+
+.item-select{
+    margin-top: 15px !important;
+}
+
+.tile-list{
+    display: block !important;
+}
+
+
+.custom-multi-select{
+    background-color: #e6e7e8 !important;
+    padding-left: 10px;
+    font-size: 11.5px;
+    padding-bottom: 10px;
+    /* margin-top: 10px; */
+    padding-top: 10px;
+    /* padding-right: 15px !important; */
+    width: calc(100% - 10px);
+    height: 15px;
+    
+}
+
+.custom-select{
+    background-color: #e6e7e8 !important;
+    padding-left: 10px;
+    font-size: 11.5px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-right: 15px !important;
+    width: 100%;
+}
+
+.mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
+    display: block;
+}
+
+.example-margin {
+    margin: 0px;
+    margin-bottom: -10px;
+}
+
+.date-input{
+    width: 100%;
+    font-size: 15.5px !important;    
+    color: rgba(0,0,0,.54);
+    font-weight: 300;
+    input{
+        font-size: 12px !important;
+        margin-top: -2px;
+        background-color: #e6e7e8;
+        padding-left: 15px;
+        font-size: 12px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        padding-right: 15px !important;
+        border: none !important;
+        box-shadow: 0;
+        width: 100%;
+        height: 15px;
+    }
+}
+.date-button{
+    color:#2c00a0;
+    position: absolute;
+    top: -24px;
+    right: -17px;
+}
+
+.radio-option{
+    font-size: 12px;
+    padding-left: 5px !important;
+}
+

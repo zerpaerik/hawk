@@ -1,0 +1,246 @@
+<div class="main-content">
+    <div class="content-header">
+        <mat-icon (click)="_backToResults()">arrow_back_ios</mat-icon>
+        <h3> OPTIMIZATION RESULTS PREVIEW </h3>
+        <button *ngIf="!new_case" mat-stroked-button class="color-primary button-clear" (click)="_downloadReport()">
+            <mat-icon> local_printshop</mat-icon>
+        </button>
+    </div>
+    <div  #content1 id="content1">
+        <mat-grid-list cols="12" rowHeight="3rem">
+            <mat-grid-tile [colspan]="12" [rowspan]="2">
+                <mat-card class="card-header full-card">
+                    <h2> {{ pdf_data.name | uppercase }} ANNUAL SAVING &nbsp;
+                        <span>{{ pdf_data.savings.toFixed(2) }} USD</span>
+                    </h2>
+                    <p class="color-secondary"> 
+                        EQUIVALENT TO <b> {{ pdf_data.savings_percent.toFixed(2) }} % </b> OF SAVINGS 
+                    </p>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <div class="divider"></div>
+        <mat-grid-list cols="12" rowHeight="5.5rem">
+            <mat-grid-tile [colspan]="6" [rowspan]="5">
+                <mat-card class="card-header no-margin">
+                    <h3 class="color-secondary"> Cost Vs Time </h3>
+                    <app-chart-cost-vs-time [chart_id]="'chart4'" [chart_data]="chart_data" [selected_values]="null"
+                        [scale]="null" [limit_dp]="pdf_data.maximum_operational_dp">
+                    </app-chart-cost-vs-time>
+                </mat-card>
+            </mat-grid-tile>
+    
+            <mat-grid-tile [colspan]="6" [rowspan]="5">
+                <mat-card class="card-header">
+                    <h3 class="color-secondary"> {{ pdf_data.current_filter.model_filter.short_name }} </h3>
+                    <!-- <div 
+                        [style.background-image]="getBackground(pdf_data.model_filter_image)" class="image-container">
+                    </div> -->
+                    <!-- <img src="{{ pdf_data.current_filter.model_filter.picture }}"> -->
+                    <img src="../../../../../../assets/imgs/filter_default.jpg">
+                    <mat-grid-list cols="12">
+                        <mat-grid-tile [colspan]="12" [rowspan]="5.5">
+                            <div class="filter-info" style="margin-top: -40px;">
+                                <h5> NOMINAL SIZE
+                                    <span>
+                                        {{ pdf_data.current_filter.model_filter.size_width }} x
+                                        {{ pdf_data.current_filter.model_filter.size_height }} x
+                                        {{ pdf_data.current_filter.model_filter.size_depth }}
+                                    </span>
+                                </h5>
+                                <h5> EFFICIENCY <span> {{ pdf_data.current_filter.model_filter.efficiency }} % </span></h5>
+                                <h5> MANUFACTURER <span>{{ pdf_data.current_filter.model_filter.manufacturer.name }} </span></h5>
+                                <h5> FRAME MATERIAL <span> {{ pdf_data.current_filter.model_filter.frame_material }} </span></h5>
+                                <h5> FRAME TYPE <span> {{ pdf_data.current_filter.model_filter.frame_type }} </span></h5>
+                                <h5> MEDIA TYPE <span> {{ pdf_data.current_filter.model_filter.media_type }} </span></h5>
+                                <h5> PART NUMBER <span> {{ pdf_data.current_filter.model_filter.part_number }}</span></h5>
+    
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    
+        <div class="divider"></div>
+    
+        <mat-grid-list cols="12">
+            <mat-grid-tile [colspan]="6" [rowspan]="3.5">
+                <mat-card class="card-header no-margin">
+                    <h5> OPTIMIZATION VS CURRENT COMPARISON </h5>
+                    <mat-grid-list cols="11">
+                        <mat-grid-tile [colspan]="3" class="table-header">
+    
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" class="table-header header-top">
+                            OPTIMIZED
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" class="table-header header-top">
+                            CURRENT
+                        </mat-grid-tile>
+                    </mat-grid-list>
+    
+                    <mat-grid-list cols="11">
+                        <mat-grid-tile [colspan]="3" class="table-header text-left">
+                            <p>CHANGE OUT TIME</p>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" class="table-content">
+                            Every {{ pdf_data.current_filter.optimize_change_rate_cycle_time.toFixed(2) }} months
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" class="table-content">
+                            Every {{ pdf_data.current_filter.change_rate_cycle_time.toFixed(2) }} months
+                        </mat-grid-tile>
+                    </mat-grid-list>
+    
+                    <mat-grid-list cols="11">
+                        <mat-grid-tile [colspan]="3" class="table-header text-left">
+                            <p>FINAL DROP PRESSURE</p>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" class="table-content">
+                            {{ pdf_data.current_filter.optimize_change_rate_dp.toFixed(2) }} inch of WC
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" class="table-content">
+                            {{ pdf_data.current_filter.change_rate_dp.toFixed(2) }} inch of WC
+                        </mat-grid-tile>
+                    </mat-grid-list>
+    
+                    <mat-grid-list cols="11">
+                        <mat-grid-tile [colspan]="3" class="table-header text-left">
+                            <p>TOTAL ANNUAL CO2 EMMISSIONS</p>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" class="table-content">
+                            {{ pdf_data.current_filter.optimize_co2_lb_year.toFixed(2) }} lbs
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" class="table-content">
+                            {{ pdf_data.current_filter.co2_lb_year.toFixed(2) }} lbs
+                        </mat-grid-tile>
+                    </mat-grid-list>
+    
+                    <mat-grid-list cols="11">
+                        <mat-grid-tile [colspan]="3" class="table-header text-left">
+                            <p>TOTAL COST</p>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" class="table-content">
+                            $ {{ pdf_data.current_filter.optimize_change_rate_annual_cost.toFixed(2) }}
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" class="table-content">
+                            $ {{ pdf_data.current_filter.change_rate_annual_cost.toFixed(2) }}
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </mat-card>
+            </mat-grid-tile>
+    
+            <mat-grid-tile [colspan]="6" [rowspan]="3.5">
+                <mat-card class="card-header">
+                    <h5> COST RELATION CHART </h5>
+                    <div class="savings-chart-container">
+                        <app-pie-chart [size]="'full'" [current_cost]="pdf_data.current_filter.change_rate_annual_cost"
+                            [optimal_cost]="pdf_data.current_filter.optimize_change_rate_annual_cost"
+                            [savings]="pdf_data.savings">
+                        </app-pie-chart>
+                    </div>
+                    <div class="savings-legend">
+                        <mat-grid-list cols="12">
+                            <p class="legend">
+                                <mat-icon class="color-third">fiber_manual_record</mat-icon>
+                                SAVINGS &nbsp;&nbsp; <b> $ {{ pdf_data.savings.toFixed(2) }} </b>
+                            </p>
+                            <p class="legend">
+                                <mat-icon class="color-primary">fiber_manual_record</mat-icon>
+                                OPTIMAL COST &nbsp;&nbsp; <b> $
+                                    {{ pdf_data.current_filter.optimize_change_rate_annual_cost.toFixed(2) }}</b>
+                            </p>
+                            <p class="legend" style="padding-left: 5px;"> <span class="circle"></span> &nbsp;
+                                CURRENT COST &nbsp;&nbsp; <b> $
+                                    {{ pdf_data.current_filter.change_rate_annual_cost.toFixed(2) }}</b>
+                            </p>
+                        </mat-grid-list>
+                    </div>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+
+    <div  #content2 id="content2">
+        <div class="divider"></div>
+        <mat-grid-list cols="12" rowHeight="6rem">
+            <mat-grid-tile [colspan]="6" [rowspan]="6">
+                <mat-card class="card-header no-margin">
+                    <h5> BASIC SYSTEM INFORMATION </h5>
+                    <div class="filter-info">
+                        <h5> STUDY CASE NAME <span> {{ pdf_data.name }} </span></h5>
+                        <h5> CREATED ON <span>{{ pdf_data.created |  date: 'dd MMM , yyyy' }} </span></h5>
+                        <h5> FILTER USED <span> {{ pdf_data.model_filter_name }} </span></h5>
+                        <h5> NUMBER OF FILTERS <span> {{ pdf_data.filters_number }} </span></h5>
+                        <h5> INDUSTRY TYPE <span> {{ pdf_data.industry_type }} </span></h5>
+                        <h5> REPLACEMENT CYCLE <span> {{ pdf_data.replacement_cycle }} months</span></h5>
+                        <h5> MAX OPERATIONAL DP <span> {{ pdf_data.maximum_operational_dp }} inch of WC</span></h5>
+                        <h5> CARBON FOOTPRINT <span> {{ pdf_data.carbon_footprint }} </span></h5>
+                        <h5> ENERGY COST <span> {{ pdf_data.energy_cost }} $</span></h5>
+                    </div>
+                    <h5> USAGE </h5>
+                    <div class="filter-info">
+                        <h5> MONTHS PER YEAR <span> {{ pdf_data.months_per_year }} </span></h5>
+                        <h5> DAYS PER MONTH <span>{{ pdf_data.days_per_month }} </span></h5>
+                        <h5> HOURS PER DAY <span> {{ pdf_data.hours_per_day }} </span></h5>
+                        <h5> TOTAL HOURS PER YEAR <span> {{ pdf_data.hours_per_year }} </span></h5>
+                    </div>
+                    <h5> EFFICIENCIES </h5>
+                    <div class="filter-info">
+                        <h5> DRIVE EFFICIENCY <span> {{ pdf_data.drive_efficiency }} % </span></h5>
+                        <h5> FAN EFFICIENCY <span>{{ pdf_data.fan_efficiency }} % </span></h5>
+                        <h5> MOTOR EFFICIENCY <span> {{ pdf_data.motor_efficiency }} % </span></h5>
+                    </div>
+                </mat-card>
+            </mat-grid-tile>
+    
+            <mat-grid-tile [colspan]="6" [rowspan]="6">
+                <mat-card class="card-header">
+                    <h5> AIRFLOWS </h5>
+                    <div class="filter-info">
+                        <h5> VARIABLE AIRFLOW <span> {{ pdf_data.variable_airflow ? 'YES' : 'NO' }} </span></h5>
+                        <h5> AIRFLOWS PER FILTER
+                            <span *ngFor="let airflow of pdf_data.airflows_per_filter">{{ airflow.flow }} cfm
+                                {{ airflow.percent }} % of time </span>
+                        </h5>
+                        <h5> TOTAL AIRFLOW <span> {{ pdf_data.total_airflow }} cfm </span></h5>
+                    </div>
+                    <h5> ADDITIONAL COSTS </h5>
+                    <div class="filter-info">
+                        <h5 *ngFor="let cost of pdf_data.current_filter.filter_extra_cost">
+                            <div *ngIf="!cost.is_annual">
+                                {{ cost.name }} <span> {{ cost.value }} $ </span>
+                            </div>
+                        </h5>
+                        <h5 style="font-weight: 500;">
+                            TOTAL ADDITIONAL COSTS <span> {{ pdf_data.current_filter.additional_costs }} $ </span>
+                        </h5>
+                    </div>
+                    <h5> ANNUAL COSTS </h5>
+                    <div class="filter-info">
+                        <h5 *ngFor="let cost of pdf_data.current_filter.filter_extra_cost">
+                            <div *ngIf="cost.is_annual">
+                                {{ cost.name }} <span> {{ cost.value }} $ </span>
+                            </div>
+                        </h5>
+                        <h5 style="font-weight: 500;">
+                            TOTAL ANNUAL COSTS <span> {{ pdf_data.current_filter.annual_cost }} $ </span>
+                        </h5>
+                    </div>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    
+        <mat-grid-list cols="12" rowHeight="4rem">
+            <mat-grid-tile [colspan]="12" [rowspan]="4">
+                <mat-card class="card-header full-card no-margin">
+                    <h5> LAB TEST REPORTS </h5>
+                    <app-filter-test-reports [reports]="pdf_data.current_filter.model_filter.reports">
+                    </app-filter-test-reports>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+
+
+</div>

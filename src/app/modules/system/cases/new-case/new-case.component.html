@@ -1,0 +1,489 @@
+<div class="new-case-container">
+    <form #systemForm="ngForm" class="form">
+        <mat-grid-list cols="12" rowHeight="680px">
+            <mat-grid-tile class="case-section" [colspan]="4">
+                <mat-card class="section-card" [class.blink-container]="no_filter_selected"
+                    style="height: 95% !important;">
+                    <mat-card-content *ngIf="filter">
+                        <p class="section-title color-primary text-center"> {{ system.current_model_filter.name }} </p>
+                        <div class="image">
+                            <img src="{{ system.current_model_filter.picture }}">
+                        </div>
+                        <p class="section-title color-primary">
+                            MANUFACTURER <br>
+                            <span> {{ system.current_model_filter.manufacturer.name }} </span>
+                        </p>
+                        <p class="section-title color-primary">
+                            FRAME MATERIAL <br>
+                            <span> {{ system.current_model_filter.frame_material }} </span>
+                        </p>
+                        <p class="section-title color-primary">
+                            FRAME TYPE <br>
+                            <span> {{ system.current_model_filter.frame_type }} </span>
+                        </p>
+                        <p class="section-title color-primary">
+                            STANDARD <br>
+                            <span> {{ system.current_model_filter.reports[0].standard.name }} </span>
+                        </p>
+                        <p class="section-title color-primary">
+                            NOMINAL SIZE <br>
+                        </p>
+                        <p class="error-message"
+                            *ngIf="requiredFields.filter_width.touched && (!system.width || system.width < 12 || system.width > 24)">
+                            Filter Width is required and must be a value between 12 and 24 inches
+                        </p>
+                        <p class="error-message"
+                            *ngIf="requiredFields.filter_height.touched && (!system.height || system.height < 12 || system.height > 24)">
+                            Filter Height is required and must be a value between 12 and 24 inches
+                        </p>
+                        <p class="error-message"
+                            *ngIf="requiredFields.filter_depth.touched && (!system.length || system.length < 1 || system.length > 24)">
+                            Filter Depth is required and must be a value between 1 and 24 inches
+                        </p>
+                        <mat-grid-list cols="12" class="hint">
+                            <mat-grid-tile [colspan]="3" class="hint"> Width </mat-grid-tile>
+                            <mat-grid-tile [colspan]="1" class="hint"></mat-grid-tile>
+                            <mat-grid-tile [colspan]="3" class="hint"> Height </mat-grid-tile>
+                            <mat-grid-tile [colspan]="1" class="hint"></mat-grid-tile>
+                            <mat-grid-tile [colspan]="3" class="hint"> Depth </mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list cols="12" rowHeight="40px">
+                            <mat-grid-tile [colspan]="3">
+                                <input class="input-size input-number" type="number" name="width" matInput
+                                    [(ngModel)]="system.width" (blur)="setAmountDecimal($event)"
+                                    [formControl]="requiredFields.filter_width"
+                                    [class.input-error]="requiredFields.filter_width.touched && (!system.width || system.width < 12 || system.width > 24)">
+                            </mat-grid-tile>
+                            <mat-grid-tile [colspan]="1">x</mat-grid-tile>
+                            <mat-grid-tile [colspan]="3">
+                                <input class="input-size input-number" type="number" name="height" matInput
+                                    [(ngModel)]="system.height" (blur)="setAmountDecimal($event)"
+                                    [formControl]="requiredFields.filter_height"
+                                    [class.input-error]="requiredFields.filter_height.touched && (!system.height || system.height < 12 || system.height > 24)">
+                            </mat-grid-tile>
+                            <mat-grid-tile [colspan]="1">x</mat-grid-tile>
+                            <mat-grid-tile [colspan]="3">
+                                <input class="input-size input-number" type="number" name="length" matInput
+                                    [(ngModel)]="system.length" (blur)="setAmountDecimal($event)"
+                                    [formControl]="requiredFields.filter_depth"
+                                    [class.input-error]="requiredFields.filter_depth.touched && (!system.length || system.length < 1 || system.length > 24)">
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list cols="12" class="hint">
+                            <mat-grid-tile [colspan]="3" class="hint"> Inches </mat-grid-tile>
+                            <mat-grid-tile [colspan]="1" class="hint"></mat-grid-tile>
+                            <mat-grid-tile [colspan]="3" class="hint"> Inches </mat-grid-tile>
+                            <mat-grid-tile [colspan]="1" class="hint"></mat-grid-tile>
+                            <mat-grid-tile [colspan]="3" class="hint"> Inches </mat-grid-tile>
+                        </mat-grid-list>
+                        <br>
+                        <button mat-stroked-button class="button-outline" (click)="_changeFilterTestReport()" *ngIf="!is_edit">CHANGE
+                            FILTER TEST REPORT</button>
+                    </mat-card-content>
+                    <mat-card-content *ngIf="!filter" class="empty-filter">
+                        <p class="section-title color-primary text-center"> THERE IS NO FILTER SELECTED
+                            <br>
+                            <span *ngIf="no_filter_selected"> Remember to select a filter to complete this case</span>
+                        </p>
+                        <button mat-stroked-button class="button-outline" (click)="_changeFilterTestReport()">SELECT
+                            FILTER </button>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+            <mat-grid-tile class="case-section" [colspan]="8">
+
+                <mat-card class="section-card" style="height: 95% !important;">
+                    <h6 class="section-title"> CASE INFORMATION </h6>
+                    <mat-grid-list cols="11" rowHeight="70px">
+                        <mat-grid-tile [colspan]="5">
+                            <div class="case-input no-margin">
+                                <mat-form-field floatLabel="always" class="form-field" hideRequiredMarker="true"
+                                    appearance="none">
+                                    <mat-label>(*) NAME YOUR CASE</mat-label>
+                                    <input required matInput class="custom-select"
+                                        [class.input-error]="!system.name && requiredFields.case_name.touched"
+                                        [formControl]="requiredFields.case_name" [(ngModel)]="system.name">
+                                </mat-form-field>
+                                <p class="error-message" *ngIf="!system.name && requiredFields.case_name.touched"> This
+                                    field is required </p>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="1"></mat-grid-tile>
+                        <mat-grid-tile [colspan]="5">
+                            <div class="case-input no-margin">
+                                <mat-label>STUDY CASE NUMBER</mat-label>
+                                <input class="custom-select" style="width: 100%;" matInput name="client_user_case"
+                                    [(ngModel)]="system.client_user_case">
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <div class="divider"></div>
+                    <mat-grid-list cols="11">
+                        <mat-grid-tile [colspan]="5">
+                            <div class="case-input no-margin">
+                                <mat-form-field floatLabel="always" class="form-field" appearance="none">
+                                    <mat-label>USER ZIP CODE</mat-label>
+                                    <input class="custom-select" matInput name="zip_code" [(ngModel)]="system.zip_code"
+                                        (blur)="_calculateEnergyCosts()">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="1"></mat-grid-tile>
+                        <mat-grid-tile [colspan]="5">
+                            <div class="case-input less-margin" [class.more-margin]="system.industry_type">
+                                <mat-label>TYPE OF CONSUMER</mat-label>
+                                <select matNativeControl class="custom-select consumer-select" style="width:100%"
+                                    name="industry_type" [(ngModel)]="system.industry_type"
+                                    (ngModelChange)="_calculateEnergyCosts()">
+                                    <option value='1'> Industrial </option>
+                                    <option value='2'> Commertial </option>
+                                    <option value='3'> Residential </option>
+                                </select>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <br>
+                    <h6 class="section-title"> CLIENT INFORMATION </h6>
+                    <mat-grid-list cols="11">
+                        <mat-grid-tile [colspan]="5">
+                            <div class="case-input no-margin">
+                                <mat-form-field floatLabel="always" class="form-field" appearance="none">
+                                    <mat-label>CLIENT NAME</mat-label>
+                                    <input class="custom-select" matInput name="client_contact_name"
+                                        [(ngModel)]="system.client_contact_name">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="1"></mat-grid-tile>
+                        <mat-grid-tile [colspan]="5">
+                            <div class="case-input no-margin">
+                                <mat-label>CLIENT ADDRESS</mat-label>
+                                <input class="custom-select" style="width: 100%;" matInput name="client_address"
+                                    [(ngModel)]="system.client_address">
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <div class="divider"></div>
+                    <mat-grid-list cols="11">
+                        <mat-grid-tile [colspan]="5">
+                            <div class="case-input no-margin">
+                                <mat-form-field floatLabel="always" class="form-field" appearance="none">
+                                    <mat-label>PHONE NUMBER</mat-label>
+                                    <input class="custom-select" matInput name="client_phone"
+                                        [(ngModel)]="system.client_phone">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="1"></mat-grid-tile>
+                        <mat-grid-tile [colspan]="5">
+                            <div class="case-input no-margin">
+                                <mat-label>CLIENT EMAIL</mat-label>
+                                <input class="custom-select" style="width: 100%;" matInput name="client_email"
+                                    [(ngModel)]="system.client_email">
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <br>
+                    <h6 class="section-title" style="margin-bottom: 0px;"> COSTS PER SET PER CYCLE </h6>
+                    <mat-grid-list cols="11">
+                        <mat-grid-tile [colspan]="2" style="height: 15px;">
+                            <div class="case-input no-margin">
+                                <mat-label>FILTER COST</mat-label>
+                                <input matInput style="width:65%" type="number"
+                                    class="custom-select input-currency input-number"
+                                    [class.input-error]="requiredFields.cost_per_filter.touched && !system.cost_per_filter"
+                                    [formControl]="requiredFields.cost_per_filter" (blur)="setAmountDecimal($event)"
+                                    [(ngModel)]="system.cost_per_filter">
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2" style="height: 15px;">
+                            <div class="case-input no-margin">
+                                <mat-label>LABOR COST</mat-label>
+                                <input class="custom-select input-currency input-number" type="number" style="width:65%"
+                                    name="labor_cost" matInput [(ngModel)]="system.labor_cost"
+                                    (ngModelChange)="updateTotalCostsPerCycle()" (blur)="setAmountDecimal($event)">
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2" style="height: 15px;">
+                            <div class="case-input no-margin">
+                                <mat-label>DISPOSAL COST</mat-label>
+                                <input class="custom-select input-currency input-number" type="number" style="width:65%"
+                                    name="disposal_cost" matInput [(ngModel)]="system.disposal_cost"
+                                    (ngModelChange)="updateTotalCostsPerCycle()" (blur)="setAmountDecimal($event)">
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2" style="height: 15px;">
+                            <div class="case-input no-margin">
+                                <mat-label>FREIGHT COST</mat-label>
+                                <input class="custom-select input-currency input-number" type="number" style="width:65%"
+                                    name="freight_cost" matInput [(ngModel)]="system.freight_cost"
+                                    (ngModelChange)="updateTotalCostsPerCycle()" (blur)="setAmountDecimal($event)">
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="3" style="height: 15px;">
+                            <div class="case-input no-margin">
+                                <mat-label><b>OTHER COSTS PER CYCLE</b></mat-label>
+                                <input class="custom-select input-currency input-additional"
+                                    name="additional_costs_per_cycle" matInput
+                                    [(ngModel)]="system.additional_costs_per_cycle" disabled>
+                                <button mat-stroked-button class="button-secondary" class="more-costs"
+                                    (click)="addMoreCostPerCycle()">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <div class="divider"></div><br>
+                    <h6 class="section-title" style="margin-bottom: 0px;"> ANNUAL COSTS </h6>
+                    <mat-grid-list cols="12">
+                        <mat-grid-tile [colspan]="4" style="height: 15px;">
+                            <div class="case-input no-margin">
+                                <mat-label>OTHER ANNUAL COSTS</mat-label>
+                                <input class="custom-select input-currency input-additional" name="annual_cost" matInput
+                                    [(ngModel)]="system.total_annual_cost" disabled>
+                                <button mat-stroked-button class="button-secondary" class="more-costs"
+                                    (click)="addAnnualCosts()">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <mat-error style="margin-top: 20px;" class="error-message"
+                        *ngIf="requiredFields.cost_per_filter.touched && !system.cost_per_filter">
+                        FILTER COST is requiered and must be greater than zero
+                    </mat-error>
+                </mat-card>
+
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="12" rowHeight="580px">
+            <mat-grid-tile class="case-section" [colspan]="12" [rowspan]="1">
+                <mat-card class="section-card-full" style="height:520px;">
+                    <h6 class="section-title"> SYSTEM INFORMATION </h6>
+                    <mat-grid-list cols="12">
+                        <p class="section-sub-title"> ANNUAL USE </p>
+                        <mat-grid-tile [colspan]="2">
+                            <mat-form-field class="input-select">
+                                <mat-label class="select-label">MONTHS</mat-label>
+                                <select matNativeControl class="custom-select" name="months"
+                                    [(ngModel)]="system.months_per_year" (ngModelChange)="_updateHoursOfUse()">
+                                    <option *ngFor="let m of months" [value]="m">{{ m }}</option>
+                                </select>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile [colspan]="2">
+                            <mat-form-field class="input-select">
+                                <mat-label class="select-label">DAYS</mat-label>
+                                <select matNativeControl class="custom-select" name="days"
+                                    [(ngModel)]="system.days_per_month" (ngModelChange)="_updateHoursOfUse()">
+                                    <option *ngFor="let d of days" [value]="d">{{ d }}</option>
+                                </select>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile [colspan]="2">
+                            <mat-form-field class="input-select">
+                                <mat-label class="select-label">HOURS</mat-label>
+                                <select matNativeControl class="custom-select" name="hours"
+                                    [(ngModel)]="system.hours_per_day" (ngModelChange)="_updateHoursOfUse()">
+                                    <option *ngFor="let h of hours" [value]="h">{{ h }}</option>
+                                </select>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile [colspan]="6">
+                            <div class="case-input">
+                                <mat-form-field floatLabel="always" class="form-field" appearance="none">
+                                    <mat-label>(*) TOTAL HOURS OF OPERATION PER YEAR</mat-label>
+                                    <input required matInput disabled [(ngModel)]="system.hours_per_year"
+                                        name="hours_per_year" class="custom-select"
+                                        (ngModelChange)="_updateHoursOfUse()">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <p class="section-sub-title"> ENERGY INFORMATION </p>
+                    <mat-grid-list cols="12">
+                        <mat-grid-tile [colspan]="2">
+                            <div class="case-input">
+                                <mat-label>(*) LOCAL CO2 EMISSIONS</mat-label>
+                                <input rquired matInput type="number" min="1" [(ngModel)]="system.carbon_footprint"
+                                    [formControl]="requiredFields.carbon_footprint" class="input-co2 input-number"
+                                    (blur)="setAmountDecimal($event)"
+                                    [class.input-error]="!system.carbon_footprint && requiredFields.carbon_footprint.touched || system.carbon_footprint < 0">
+                                <mat-error class="error-message"
+                                    *ngIf="!system.carbon_footprint && requiredFields.carbon_footprint.touched || system.carbon_footprint < 0">
+                                    This field is required and positve</mat-error>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2">
+                            <div class="case-input">
+                                <mat-label>(*) ENERGY COST</mat-label>
+                                <input required matInput type="number" [formControl]="requiredFields.energy_cost"
+                                    [(ngModel)]="system.energy_cost" class="input-energy input-number"
+                                    (blur)="setAmountDecimal($event)"
+                                    [class.input-error]="!system.energy_cost && requiredFields.energy_cost.touched || system.energy_cost < 0">
+                                <mat-error class="error-message"
+                                    *ngIf="!system.energy_cost && requiredFields.energy_cost.touched || system.energy_cost < 0">
+                                    This field is required and positve</mat-error>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2">
+                            <div class="case-input">
+                                <mat-label>(*) FILTER QUANTITY</mat-label>
+                                <input required matInput type="number" [formControl]="requiredFields.filters_number"
+                                    [(ngModel)]="system.filters_number" (ngModelChange)="_updateTotalAirflow()"
+                                    class="input-number" (blur)="setAmountDecimal($event)"
+                                    [class.input-error]="!system.filters_number && requiredFields.filters_number.touched || system.filters_number < 0">
+                                <mat-error class="error-message"
+                                    *ngIf="!system.filters_number && requiredFields.filters_number.touched || system.filters_number < 0">
+                                    This field is required and positve</mat-error>
+                            </div>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile [colspan]="2">
+                            <mat-form-field class="input-select">
+                                <mat-label class="select-label">TYPE OF FLOW</mat-label>
+                                <select matNativeControl class="custom-select" name="variable_airflow"
+                                    [(ngModel)]="system.variable_airflow">
+                                    <option [value]="1"> Constant </option>
+                                    <option [value]="2"> Variable </option>
+                                </select>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2">
+                            <div class="case-input">
+                                <mat-label>(*) AIRFLOW PER FILTER</mat-label>
+                                <input required matInput type="number"
+                                    [formControl]="requiredFields.airflows_per_filter" (click)="_openModalAirflow()"
+                                    [(ngModel)]="system.airflow_per_filter" (ngModelChange)="_updateTotalAirflow()"
+                                    class="input-airflow input-number" (blur)="setAmountDecimal($event)"
+                                    [class.input-error]="!system.airflow_per_filter && requiredFields.airflows_per_filter.touched  || system.airflow_per_filter < 0">
+                                <mat-error class="error-message"
+                                    *ngIf="!system.airflow_per_filter && requiredFields.airflows_per_filter.touched || system.airflow_per_filter < 0">
+                                    This field is required and positve
+                                </mat-error>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2">
+                            <div class="case-input">
+                                <mat-label>TOTAL AIRFLOW</mat-label>
+                                <input matInput name="total_airflow" type="number" [(ngModel)]="system.total_airflow"
+                                    class="input-airflow input-number disabled" disabled>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <div class="divider"></div>
+                    <p class="section-sub-title"> EFFICIENCIES </p>
+                    <p class="error-message"
+                        *ngIf="efficienciesError[0] || efficienciesError[1] || efficienciesError[2]">
+                        All efficiencies values are requiered and greater than zero
+                    </p>
+                    <mat-grid-list cols="12">
+                        <mat-grid-tile [colspan]="2" class="efficiencies">
+                            <div class="efficiencies-input">
+                                <h6> (*) MOTOR </h6>
+                                <div class="efficiencies-container" [class.div-error]="efficienciesError[0]">
+                                    <app-gauge-component [value]='system.motor_efficiency'
+                                        (share)="_setMotorEfficiency($event)"></app-gauge-component>
+                                </div>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2" class="efficiencies">
+                            <div class="efficiencies-input">
+                                <h6> (*) DRIVER </h6>
+                                <div class="efficiencies-container" [class.div-error]="efficienciesError[1]">
+                                    <app-gauge-component [value]='system.drive_efficiency'
+                                        (share)="_setDriverEfficiency($event)"></app-gauge-component>
+                                </div>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2" class="efficiencies">
+                            <div class="efficiencies-input">
+                                <h6> (*) FAN </h6>
+                                <div class="efficiencies-container" [class.div-error]="efficienciesError[2]">
+                                    <app-gauge-component [value]='system.fan_efficiency'
+                                        (share)="_setFanEfficiency($event)"></app-gauge-component>
+                                </div>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="6" class="efficiencies">
+                            <div class="efficiencies-input">
+                                <mat-list style="margin-top:5px">
+                                    <mat-list-item>
+                                        <div class="case-input no-padding" style="position: relative;">
+                                            <mat-error class="error-message error-fixed"
+                                                *ngIf="!system.current_filter.average_pressure_drop  && requiredFields.average_pressure_drop.touched || system.current_filter.average_pressure_drop < 0">
+                                                This field is required and positve </mat-error>
+                                            <mat-label>(*) AVERAGE DP WHEN FILTER CHANGE</mat-label>
+                                            <input requiered matInput type="number"
+                                                [formControl]="requiredFields.average_pressure_drop"
+                                                [(ngModel)]="system.current_filter.average_pressure_drop"
+                                                class="input-dp input-number" min="0.1" step="0.1"
+                                                [max]="system.maximum_operational_dp" (blur)="setAmountDecimal($event)"
+                                                [class.input-error]="!system.current_filter.average_pressure_drop  &&  requiredFields.average_pressure_drop.touched || system.current_filter.average_pressure_drop < 0">
+                                        </div>
+                                    </mat-list-item>
+                                    <div class="divider"></div>
+                                    <mat-list-item>
+                                        <div class="case-input no-padding" style="position: relative;">
+                                            <mat-label>(*) MAXIMUM OPRATIONAL DP</mat-label>
+                                            <mat-error class="error-message error-fixed"
+                                                *ngIf="!system.maximum_operational_dp && requiredFields.maximum_operational_dp.touched || system.maximum_operational_dp < 0">
+                                                This field is required and positve
+                                            </mat-error>
+                                            <input required matInput type="number"
+                                                [formControl]="requiredFields.maximum_operational_dp"
+                                                [(ngModel)]="system.maximum_operational_dp"
+                                                class="input-dp input-number" (blur)="setAmountDecimal($event)"
+                                                min="0.1" step="0.1"
+                                                [class.input-error]="!system.maximum_operational_dp && requiredFields.maximum_operational_dp.touched || system.maximum_operational_dp < 0">
+                                        </div>
+                                    </mat-list-item>
+                                    <div class="divider"></div>
+                                    <mat-list-item>
+                                        <div class="case-input no-padding" style="position: relative;">
+                                            <mat-error class="error-message error-fixed"
+                                                *ngIf="!system.replacement_cycle && requiredFields.replacement_cycle.touched || system.replacement_cycle < 0">
+                                                This field is required and positve</mat-error>
+                                            <mat-label>(*) MONTHS OF OPERATION AT TIME OF CHANGE OUT</mat-label>
+                                            <input required matInput type="number" class="input-number"
+                                                [formControl]="requiredFields.replacement_cycle"
+                                                [(ngModel)]="system.replacement_cycle" (blur)="setAmountDecimal($event)"
+                                                [class.input-error]="(!system.replacement_cycle && requiredFields.replacement_cycle.touched || system.replacement_cycle < 0)">
+                                        </div>
+                                    </mat-list-item>
+                                </mat-list>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+    <p class="text-required">
+        (*) FIELDS REQUIRED <br><br>
+        Remember to fill correctly all requiered fields so you can compare, optimize and save your case
+    </p>
+    <mat-grid-list cols="12">
+        <mat-grid-tile [colspan]="3">
+            <button mat-stroked-button class="button-outline" (click)="cancelCase()">CANCEL</button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3">
+            <button mat-stroked-button class="button-primary" [disabled]="getDisabledExpresion()">COMPARE</button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3">
+            <button mat-stroked-button class="button-primary" (click)="_attemptToOptimizeCase(true)"
+                [disabled]="getDisabledExpresion()">
+                OPTIMIZE
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3">
+            <button mat-stroked-button class="button-secondary" (click)="_attemptToOptimizeCase(false)"
+                [disabled]="getDisabledExpresion()">
+                SAVE
+            </button>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

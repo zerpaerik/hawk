@@ -1,0 +1,141 @@
+<div class="main-content">
+    <div class="content-header">
+        <mat-icon *ngIf="new_comparison" (click)="resetCases();edit=false">arrow_back_ios</mat-icon>
+        <h3 *ngIf="!edit"> {{ new_comparison ? 'NEW COMPARISON' : 'TCO COMPARISONS' }} </h3>
+        <h3 *ngIf="edit"> {{ case_data.name }} </h3>
+        <button 
+            *ngIf="!new_comparison"
+            mat-stroked-button 
+            class="auth-button button-primary"  (click)="new_comparison = true"> NEW COMPARISON 
+        </button>
+    </div>
+    <div  *ngIf="!new_comparison">
+        <div class="searchbar-container">
+            <input type="text" placeholder="Search for comparison" [(ngModel)]="searchTerm">
+            <mat-icon>search</mat-icon>
+        </div>
+        <div class="comparison-list" *ngFor="let case of study_cases">
+            <mat-grid-list [cols]=11 >
+                <mat-grid-tile [colspan]="3">
+                    <div class="case-card">
+                        <h5> {{ case.name }} </h5>
+                        <h6> <b>CURRENT FILTER:</b> {{ case.model_filter_name }} </h6>
+                        <img src="{{ case.model_filter_image }}">
+                        <p>Filter change date: 12 12/2020</p>
+                        <mat-divider></mat-divider>
+                        <mat-card-actions>
+                            <button mat-button (click)="_viewOptimization(case)">  VIEW OPTIMIZATION</button>
+                            <button mat-button (click)="_editCase(case)">VIEW DETAILS</button>
+                        </mat-card-actions>
+                        <button mat-icon-button color="dark" class="more" [matMenuTriggerFor]="menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="_editCase(case)">
+                                <span>Edit</span>
+                            </button>
+                            <button mat-menu-item >
+                                <span>Eliminate</span>
+                            </button>
+                            <button mat-menu-item (click)="_duplicateCase(case)">
+                                <span>Duplicate</span>
+                            </button>
+                            <button mat-menu-item>
+                                <span>Compare</span>
+                            </button>
+                            <button mat-menu-item disabled>
+                                <span>Pair instrument</span>
+                            </button>
+                            <button mat-menu-item>
+                                <span>Optimize</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="8" class="comparisons-list-container" *ngIf="case.comparisons">
+                    <mat-card class="section-card padding-left">
+                        <h6 class="color-secondary"> {{ case.comparisons.length > 0 ? case.comparisons.length : 'NO' }} COMPARISONS  </h6>
+                        <mat-grid-list cols="4" rowHeight="160px" >
+                            <mat-grid-tile *ngFor="let comparison of case.comparisons" (click)="viewComparisonDetails(case,comparison)">
+                                <div class="comparison-card">
+                                    <h5> VS {{ comparison.name }} </h5>
+                                    <img src="{{ comparison.model_filter.picture  }}"> 
+                                    <h6 [class.color-success]="case.current_filter.change_rate_annual_cost - comparison.optimize_change_rate_annual_cost > 0"
+                                        [class.color-danger]="case.current_filter.change_rate_annual_cost - comparison.optimize_change_rate_annual_cost < 0"> 
+                                        {{ (((case.current_filter.change_rate_annual_cost - 
+                                            comparison.optimize_change_rate_annual_cost) * 100) / 
+                                            case.current_filter.change_rate_annual_cost).toFixed(2) }} % 
+                                        <span> {{ case.current_filter.change_rate_annual_cost - comparison.optimize_change_rate_annual_cost > 0 ? 'better' : 'worst'}} </span> 
+                                    </h6>
+                                    <p> Save <b>{{ (case.current_filter.change_rate_annual_cost - comparison.optimize_change_rate_annual_cost).toFixed(2) }}</b> USD </p>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="comparison-card new-card" (click)="case.selected =true;new_comparison=true;selected_case=case">
+                                    <button mat-stroke class="button-clear">
+                                        <mat-icon>add_circle_outline</mat-icon>
+                                        <p>NEW COMPARISON</p>
+                                    </button>
+                                </div>
+                            </mat-grid-tile>
+                          </mat-grid-list>
+                    </mat-card>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+    </div>
+    
+    <!-- <mat-grid-list [cols] = "num_cols" style="height: auto;" *ngIf="!new_case">
+        <mat-grid-tile 
+        *ngFor="let case of cases"
+        [colspan] = "1"
+        [rowspan] = "1">
+            <div class="case-card">
+                <p>Filter change date: 12 12/2020</p>
+                <img src="{{ server_name + case.model_filter_image }}">
+                <h5> {{ case.name }} </h5>
+                <h6> FILTER: {{ case.model_filter_name }} </h6>
+                <mat-divider></mat-divider>
+                <mat-card-actions>
+                    <button mat-button (click)="_viewOptimization(case)">  VIEW OPTIMIZATION</button>
+                    <button mat-button (click)="_editCase(case)">VIEW DETAILS</button>
+                </mat-card-actions>
+                <button mat-icon-button color="dark" class="more" [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="_editCase(case)">
+                        <span>Edit</span>
+                    </button>
+                    <button mat-menu-item >
+                        <span>Eliminate</span>
+                    </button>
+                    <button mat-menu-item (click)="_duplicateCase(case)">
+                        <span>Duplicate</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>Compare</span>
+                    </button>
+                    <button mat-menu-item disabled>
+                        <span>Pair instrument</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>Optimize</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list> -->
+</div>
+<!-- <app-new-case 
+    *ngIf="new_case" 
+    [filter]="new_case_filter" 
+    [edition]="edit"
+    [case_data]="case_data" 
+    (created)="_refresCaseList()">
+</app-new-case> -->
+<app-new-comparison 
+    *ngIf="new_comparison" 
+    [case]="selected_case"
+    [cases]="study_cases" (cancel)="resetCases()">
+</app-new-comparison>

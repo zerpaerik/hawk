@@ -1,0 +1,59 @@
+.title{
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.button-outline, .button-primary{
+    width: 100%;
+}
+
+
+.payment-info{
+    display: block;
+    height: 100%;
+    width: 90%;
+    p{
+        margin: 0;
+        font-size: 12px;
+    }
+}
+
+.right{
+    text-align: right !important;
+}
+
+.details{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    mat-divider{
+        width: 94%;
+        left: 3%;
+    }
+    p{
+        font-size: 12px;
+        width: 100%;
+        span{
+            float: right;
+        }
+    }
+}
+
+mat-panel-title, mat-panel-description{
+    font-size: 12px;
+}
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+
+  .mat-list-option{
+      font-size: 12px;
+  }
+

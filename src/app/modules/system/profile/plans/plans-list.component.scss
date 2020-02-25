@@ -1,0 +1,22 @@
+
+.plans-container{
+    position: relative;
+    h6{
+        margin-bottom: 0px;
+        text-transform: uppercase;
+    }
+    mat-label{
+        font-size: 12px;
+    }
+    p{
+        font-size: 10px;
+        margin-top: 0px;
+    }
+    button{
+        width: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 12px;
+    }
+}

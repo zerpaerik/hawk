@@ -1,0 +1,309 @@
+<mat-grid-list cols="12" rowHeight="920px">
+    <mat-grid-tile [colspan]="6" class="tile-list">
+        <mat-list class="field-list">
+            <mat-list-item class="item first-item">
+                <div class="case-input">
+                    <mat-label>Filter Model Name </mat-label>
+                    <input 
+                        matInput 
+                        name="filter_model" [(ngModel)]="search_data.name">
+                </div>
+            </mat-list-item>
+            <mat-list-item class="item">
+                <div class="case-input">
+                    <mat-label>Filter Part Number </mat-label>
+                    <input 
+                        matInput 
+                        name="part_number" [(ngModel)]="search_data.part_number">
+                </div>
+            </mat-list-item>
+            <mat-list-item class="item item-select">
+                <mat-form-field class="field-select" floatLabel="always">    
+                    <mat-label class="select-label">Filter Type</mat-label>
+                        <mat-select matNativeControl class="custom-multi-select" multiple [(ngModel)]="search_data.filter_type">
+                            <mat-option *ngFor="let type of options.FILTER_TYPE" [value]="type[0]">{{ type[1] }}</mat-option>
+                        </mat-select>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item class="item">
+                    <div class="case-input">
+                        <mat-label>Min filter depth </mat-label>
+                        <input 
+                            style="width: calc(100% - 20px) !important;"
+                            matInput 
+                            name="filter_model" [(ngModel)]="search_data.size_depth_min">
+                    </div>
+                    <div class="case-input">
+                        <mat-label>Max filter depth </mat-label>
+                        <input 
+                            matInput 
+                            name="filter_model" [(ngModel)]="search_data.size_depth_max">
+                    </div>
+            </mat-list-item>
+            <mat-list-item class="item item-select">
+                <mat-form-field class="field-select" floatLabel="always">    
+                    <mat-label class="select-label">Filter Frame Type</mat-label>
+                        <mat-select matNativeControl class="custom-multi-select" multiple [(ngModel)]="search_data.frame_type">
+                            <mat-option *ngFor="let frame of options.FRAME_TYPE" [value]="frame[0]">{{ frame[1] }}</mat-option>
+                        </mat-select>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item class="item item-select">
+                <mat-form-field class="field-select" floatLabel="always">    
+                    <mat-label class="select-label">Frame Material</mat-label>
+                        <mat-select matNativeControl class="custom-multi-select" multiple [(ngModel)]="search_data.frame_material">
+                            <mat-option *ngFor="let frame of options.FRAME_MATERIAL" [value]="frame[0]">{{ frame[1] }}</mat-option>
+                        </mat-select>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item class="item first-item">
+                <mat-radio-group color="primary" [(ngModel)]="hasFaceScreen">
+                    <mat-radio-button 
+                        #button3 class="radio-option" 
+                        value="true" 
+                        (click)="checkStateFaceScreen(button3)">Has Face Screen
+                    </mat-radio-button>
+                    <mat-radio-button 
+                        #button4 class="radio-option" 
+                        style="padding-left: 15px !important;" 
+                        value="false"
+                        (click)="checkStateFaceScreen(button4)">No Face Screen
+                    </mat-radio-button>
+                </mat-radio-group>
+            </mat-list-item>
+
+            <mat-list-item class="item item-select" style="margin-top: 0px !important;">
+                <mat-form-field class="field-select" floatLabel="always">    
+                    <mat-label class="select-label">Manufacturer</mat-label>
+                        <mat-select matNativeControl class="custom-multi-select" [(ngModel)]="search_data.manufacturers">
+                            <mat-option *ngFor="let manufacturer of options.MANUFACTURERS" [value]="manufacturer.name">{{ manufacturer.name }}</mat-option>
+                        </mat-select>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item class="item item-select">
+                <mat-form-field class="field-select" floatLabel="always">    
+                    <mat-label class="select-label">Media Material</mat-label>
+                        <mat-select matNativeControl class="custom-multi-select" multiple [(ngModel)]="search_data.media_type">
+                            <mat-option *ngFor="let media of options.MEDIA_MATERIAL" [value]="media[0]">{{ media[1] }}</mat-option>
+                        </mat-select>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item class="item first-item">
+                <mat-radio-group color="primary" [(ngModel)]="isIncinerable">
+                    <mat-radio-button 
+                        #button class="radio-option" 
+                        value="true" 
+                        (click)="checkState(button)">Incinerable
+                    </mat-radio-button>
+                    <mat-radio-button 
+                        #button2 class="radio-option" 
+                        style="padding-left: 15px !important;" 
+                        value="false"
+                        (click)="checkState(button2)">No Incinerable
+                    </mat-radio-button>
+                </mat-radio-group>
+            </mat-list-item>
+        </mat-list>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="6">
+        <mat-list class="field-list">
+            <mat-list-item class="item first-item" style="margin-top: 3px !important">
+                <mat-form-field class="field-select" floatLabel="always">    
+                    <mat-label class="select-label">Test Standard</mat-label>
+                        <mat-select matNativeControl class="custom-multi-select" [(ngModel)]="search_data.standard">
+                            <mat-option *ngFor="let norm of norms" [value]="norm.name">{{ norm.name }}</mat-option>
+                        </mat-select>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item class="item" style="margin-top: 12px !important;">
+                <div class="case-input">
+                    <mat-label>Filter test min width </mat-label>
+                    <input 
+                        style="width: calc(100% - 20px) !important;"
+                        matInput 
+                        name="filter_model" [(ngModel)]="search_data.size_width_min">
+                </div>
+                <div class="case-input">
+                    <mat-label>Filter test max width </mat-label>
+                    <input 
+                        matInput 
+                        name="filter_model" [(ngModel)]="search_data.size_width_max">
+                </div>
+            </mat-list-item>
+            <mat-list-item class="item" style="margin-top: 12px !important;">
+                <div class="case-input">
+                    <mat-label>Filter test min height </mat-label>
+                    <input 
+                        style="width: calc(100% - 20px) !important;"
+                        matInput 
+                        name="filter_model" [(ngModel)]="search_data.size_height_min">
+                </div>
+                <div class="case-input">
+                    <mat-label>Filter test max height </mat-label>
+                    <input 
+                        matInput 
+                        name="filter_model" [(ngModel)]="search_data.size_height_max">
+                </div>
+            </mat-list-item>
+            <mat-list-item class="item" style="margin-top: 12px !important;">
+                <div class="case-input">
+                    <mat-label>Min test airflow </mat-label>
+                    <input 
+                        style="width: calc(100% - 20px) !important;"
+                        matInput 
+                        name="test_airflow_min" [(ngModel)]="search_data.test_airflow_min">
+                </div>
+                <div class="case-input">
+                    <mat-label>Max test airflow </mat-label>
+                    <input 
+                        matInput 
+                        name="test_airflow_max" [(ngModel)]="search_data.test_airflow_max">
+                </div>
+            </mat-list-item>
+            <mat-list-item class="item" style="margin-top: 18px !important;">
+                <div class="case-input">
+                    <mat-label>Min final Dp </mat-label>
+                    <input 
+                        style="width: calc(100% - 20px) !important;"
+                        matInput 
+                        name="max_press_drop_min" [(ngModel)]="search_data.max_press_drop_min">
+                </div>
+                <div class="case-input">
+                    <mat-label>Max final Dp </mat-label>
+                    <input 
+                        matInput 
+                        name="max_press_drop_max" [(ngModel)]="search_data.max_press_drop_max">
+                </div>
+            </mat-list-item>
+            <mat-list-item class="item" style="margin-top: 15px !important;">
+                <div class="case-input">
+                    <mat-label>Min test efficiency </mat-label>
+                    <input 
+                        style="width: calc(100% - 20px) !important;"
+                        matInput 
+                        name="efficiency_min" [(ngModel)]="search_data.efficiency_min">
+                </div>
+                <div class="case-input">
+                    <mat-label>Max test efficiency </mat-label>
+                    <input 
+                        matInput 
+                        name="efficiency_max" [(ngModel)]="search_data.efficiency_max">
+                </div>
+            </mat-list-item>
+            <mat-list-item class="item" style="margin-top: 12px !important;">
+                <div class="case-input">
+                    <mat-label>Min E1 </mat-label>
+                    <input 
+                        style="width: calc(100% - 20px) !important;"
+                        matInput 
+                        name="e1_min" [(ngModel)]="search_data.e1_min">
+                </div>
+                <div class="case-input">
+                    <mat-label>Max E1 </mat-label>
+                    <input 
+                        matInput 
+                        name="e1_max" [(ngModel)]="search_data.e1_max">
+                </div>
+            </mat-list-item>
+            <mat-list-item class="item" style="margin-top: 12px !important;">
+                <div class="case-input">
+                    <mat-label>Min E2 </mat-label>
+                    <input 
+                        style="width: calc(100% - 20px) !important;"
+                        matInput 
+                        name="e2_min" [(ngModel)]="search_data.e2_min">
+                </div>
+                <div class="case-input">
+                    <mat-label>Max E2 </mat-label>
+                    <input 
+                        matInput 
+                        name="e2_max" [(ngModel)]="search_data.e2_max">
+                </div>
+            </mat-list-item>
+            <mat-list-item class="item" style="margin-top: 12px !important;">
+                <div class="case-input">
+                    <mat-label>Min E3 </mat-label>
+                    <input 
+                        style="width: calc(100% - 20px) !important;"
+                        matInput 
+                        name="e3_min" [(ngModel)]="search_data.e3_min">
+                </div>
+                <div class="case-input">
+                    <mat-label>Max E3 </mat-label>
+                    <input 
+                        matInput 
+                        name="e3_max" [(ngModel)]="search_data.e3_max">
+                </div>
+            </mat-list-item>
+            <mat-list-item class="item first-item" style="margin-top: 17px !important">
+                <mat-form-field class="field-select" floatLabel="always">    
+                    <mat-label class="select-label">Laboratory</mat-label>
+                        <mat-select matNativeControl class="custom-multi-select" [(ngModel)]="search_data.labs">
+                            <mat-option *ngFor="let lab of labs" [value]="lab.name">{{ lab.name }}</mat-option>
+                        </mat-select>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item class="item first-item" style="margin-top: 17px !important">
+                <mat-form-field class="field-select" floatLabel="always">    
+                    <mat-label class="select-label">Dust Type</mat-label>
+                        <mat-select matNativeControl class="custom-multi-select" multiple [(ngModel)]="search_data.dust_type">
+                            <mat-option *ngFor="let dust of options.DUST_TYPE" [value]="dust[0]">{{ dust[1] }}</mat-option>
+                        </mat-select>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item class="item first-item" style="margin-top: 17px !important">
+                <mat-form-field class="field-select" floatLabel="always">    
+                    <mat-label class="select-label">Supplier</mat-label>
+                        <mat-select matNativeControl class="custom-multi-select" multiple [(ngModel)]="search_data.provider">
+                            <mat-option *ngFor="let provider of options.PROVIDERS" [value]="provider[0]">{{ provider[1] }}</mat-option>
+                        </mat-select>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item class="item first-item">
+                <mat-radio-group color="primary" [(ngModel)]="isPrivate">
+                    <mat-radio-button 
+                        #button5 class="radio-option" 
+                        value="true" 
+                        (click)="checkStateTypeOfReport(button5)">Private Report
+                    </mat-radio-button>
+                    <mat-radio-button 
+                        #button6 class="radio-option" 
+                        style="padding-left: 15px !important;" 
+                        value="false"
+                        (click)="checkStateTypeOfReport(button6)">Public Report
+                    </mat-radio-button>
+                </mat-radio-group>
+            </mat-list-item>
+            <mat-list-item class="item" style="margin-top: 25px !important">
+                <div class="date-input">
+                    <mat-form-field floatLabel="always">
+                        <input matInput [matDatepicker]="picker" placeholder="Max date test report" [(ngModel)]="search_data.pdf_date_min">
+                        <mat-datepicker-toggle matSuffix [for]="picker" class="date-button"></mat-datepicker-toggle>
+                        <mat-datepicker #picker
+                                        class="date-picker">
+                        </mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </mat-list-item>
+            <mat-list-item class="item">
+                <div class="date-input">
+                    <mat-form-field floatLabel="always">
+                        <input matInput [matDatepicker]="picker2" placeholder="Max date test report" [(ngModel)]="search_data.pdf_date_max">
+                        <mat-datepicker-toggle matSuffix [for]="picker2" class="date-button"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2
+                                        class="date-picker">
+                        </mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="12">
+    <mat-grid-tile [colspan]="12">
+        <button mat-stroked-button class="button-primary" (click)="_searchFilter()">APPLY FILTERS</button>
+    </mat-grid-tile>
+</mat-grid-list>
+
+
+

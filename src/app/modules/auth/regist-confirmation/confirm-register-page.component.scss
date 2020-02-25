@@ -1,0 +1,58 @@
+h5{
+    color:#2c00a0;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+p{
+    font-size: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.opacity{
+    filter: blur(1.5px);
+}
+
+.code-container{
+    width: 60%;
+    margin-left: 20%;
+    height: 70px !important;
+    .mat-spinner{
+        svg{
+            width: 60px !important;
+            height: 60px !important;
+        }
+    }
+}
+.mat-grid-tile .mat-figure .mat-grid-list {
+    height: 70px !important;
+}
+.code-input{
+    width: 80% !important;
+    height: 70% !important;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 650;
+}
+
+
+.spinner-container{
+    position: absolute;
+    margin-top: 50%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.mat-spinner{
+    justify-self: center;
+}
+
+.auth-card{
+    height: 50%;
+}
+
+.auth-form{
+    margin-top: 37%;
+}

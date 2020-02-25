@@ -1,0 +1,21 @@
+<h5 class="color-secondary"> MY SUBSCRIPTIONS </h5>
+<div class="no-plans" *ngIf="user_subscriptions && user_subscriptions.length == 0">
+    <p> You are not subscribed to any plan yet </p>
+    <button mat-stroked-button class="button-primary" (click)="_listPlans()">SUBSCRIBE TO A PLAN</button>
+</div>
+
+<div *ngIf="user_subscriptions && user_subscriptions.length > 0">
+    <div class="plans-container" *ngFor="let us of user_subscriptions">
+        <h6 class="color-secondary"> {{ us.plan.name }} </h6>
+        <mat-label class="color-secondary"> COST </mat-label>
+        <p> $ {{ (us.plan.cost / 100).toFixed(2) | number }} </p>
+        <mat-label class="color-secondary"> DESCRIPTION </mat-label>
+        <p> {{ us.plan.description }} </p>
+        <mat-label class="color-secondary"> MEMBER SINCE  </mat-label>
+        <p> {{ us.created | date }} </p>
+        <mat-label class="color-secondary"> CUTOFF DATE  </mat-label>
+        <p> {{ us.next_charge | date }} </p>
+        <button mat-stroked-button class="button-primary" (click)="_deleteSubscription(us)">CANCEL SUBSCRIPTION</button>
+        <mat-divider></mat-divider>
+    </div>
+</div>

@@ -1,0 +1,290 @@
+<div class="main-content">
+    <div class="content-header">
+        <mat-icon>arrow_back_ios</mat-icon>
+        <h3> COMPARISON RESULTS </h3>
+    </div>
+
+    <mat-grid-list cols = "12" rowHeight="100px">
+        <mat-grid-tile class="case-section" [colspan]="12">
+            <mat-card class="section-card card-header no-margin" style="height:70px !important;" >
+                <h2> YOU COULD SAVE &nbsp; {{ savings.current_savings }} USD  </h2>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="divider"></div>
+    <div style="text-align:right;font-size: 11px;">
+        <mat-slide-toggle
+          class="example-margin"
+          color="primary"
+          [(ngModel)]="show_same_scale"
+          (ngModelChange)="toggleScale()">
+        Show charts in same scale
+      </mat-slide-toggle>
+    </div>
+    <div class="divider"></div>
+    <mat-grid-list cols = "12" rowHeight="755px">
+        <mat-grid-tile 
+        class="case-section"
+        [colspan] = "6">    
+            <mat-card class="section-card no-margin" style="height:720px !important;margin-left: 0px;" >
+                <h5> Current Filter: <b>{{ result_data.case.model_filter_name }}</b> </h5>
+                <div class="filter-image-container">
+                    <img src="{{ result_data.case.model_filter_image }}">
+                </div>
+                <!-- <app-chart-dp-vs-time 
+                    *ngIf="comparison_dp_vs_time_charts !== null" 
+                    [chart_data]="comparison_dp_vs_time_charts.dp_vs_t_w_optimized_graph_current_filter"
+                    [selected_values]="null"
+                    [chart_id]="'chart2'"
+                    [limit_dp]="null">
+                </app-chart-dp-vs-time>  -->
+                <div class="range-container">
+                    <div class="range-panel" *ngIf="selected_data">
+                        <h6> {{ selected_data.change_out_time.toFixed(2) }} months  </h6>
+                        <input 
+                        [(ngModel)]="range_value"
+                        (ngModelChange)="_setRange()"
+                        class="range round" 
+                        type="range" min="0" max="{{ range_limit }}" step="1">
+                    </div>
+                </div>
+                <app-chart-cost-vs-time
+                    *ngIf="current_filter_cost_vs_time_chart !== null" 
+                    [chart_id]="'chart4'"
+                    [chart_data]="current_filter_cost_vs_time_chart"
+                    [selected_values]="selected_data"
+                    [limit_dp]="null"
+                    [scale]="scale"
+                    (has_limit)="setYaxesLimit($event)">
+                </app-chart-cost-vs-time>
+                 
+                <mat-grid-list cols="12" class="indicators-container"> 
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                        <div class="indicator optimized"></div>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                        <div class="indicator current"></div>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                        <div class="indicator selected"></div>
+                    </mat-grid-tile>
+                </mat-grid-list> 
+                <mat-grid-list cols="12">
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                        
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header header-top">
+                        OPTIMIZED
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header header-top">
+                        CURRENT
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header header-top">
+                        SELECTED
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="12" >
+                    <mat-grid-tile [colspan]="3" class="table-header text-left">
+                        <p>CHANGE OUT TIME</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        Every {{ result_data.case.current_filter.optimize_change_rate_cycle_time.toFixed(2) }} months
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        Every {{ result_data.case.current_filter.change_rate_cycle_time.toFixed(2) }} months
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        Every &nbsp;
+                        <span *ngIf="selected_data"> {{ selected_data.change_out_time.toFixed(2) }} </span>
+                        &nbsp; months
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="12">
+                    <mat-grid-tile [colspan]="3" class="table-header text-left">
+                        <p>FINAL DROP PRESSURE</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        {{ result_data.case.current_filter.optimize_change_rate_dp.toFixed(2) }} inch of WC
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        {{ result_data.case.current_filter.change_rate_dp.toFixed(2) }} inch of WC
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        <span *ngIf="selected_data">{{ selected_data.change_out_pressure_drop.toFixed(2) }} inch of WC </span>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="12">
+                    <mat-grid-tile [colspan]="3" class="table-header text-left">
+                        <p>TOTAL ANNUAL CO2 EMMISSIONS</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        {{ result_data.case.current_filter.optimize_co2_lb_year.toFixed(2) }} lbs
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        {{ result_data.case.current_filter.co2_lb_year.toFixed(2) }} lbs
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        <span *ngIf="selected_data">{{ selected_data.CO2_emissions.toFixed(2) }} lbs </span>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="12">
+                    <mat-grid-tile [colspan]="3" class="table-header text-left">
+                        <p>TOTAL COST</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        $ {{ result_data.case.current_filter.optimize_change_rate_annual_cost.toFixed(2) }}
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        $ {{ result_data.case.current_filter.change_rate_annual_cost.toFixed(2) }}
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        <span *ngIf="selected_data"> $ {{ selected_data.annual_cost.toFixed(2) }} </span>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile 
+        class="case-section"
+        [colspan] = "6">    
+            <mat-card class="section-card no-margin" style="height:720px !important;" >
+                <h5> Proposed Filter: <b>{{ result_data.comparison_data.name }}</b></h5>
+                <div class="filter-image-container">
+                    <img src="{{ result_data.comparison_data.model_filter.picture }}">
+                </div>
+                <!-- <app-chart-dp-vs-time 
+                    *ngIf="comparison_dp_vs_time_charts !== null" 
+                    [chart_id]="'chart3'"
+                    [chart_data]="comparison_dp_vs_time_charts.dp_vs_t_w_optimized_graph_proposed_filter"
+                    [selected_values]="null"
+                    [limit_dp]="null">
+                </app-chart-dp-vs-time> -->
+                <div class="range-container">
+                    <div class="range-panel" *ngIf="selected_data_proposed_filter">
+                        <h6> {{ selected_data_proposed_filter.change_out_time.toFixed(2) }} months  </h6>
+                        <input 
+                        [(ngModel)]="range_value_proposed_filter"
+                        (ngModelChange)="_setRangeProposedFilter()"
+                        class="range round" 
+                        type="range" min="0" max="{{ range_limit_proposed_filter }}" step="1">
+                    </div>
+                </div>
+                <app-chart-cost-vs-time
+                    *ngIf="proposed_filter_cost_vs_time_chart !== null" 
+                    [chart_id]="'chart5'"
+                    [chart_data]="proposed_filter_cost_vs_time_chart"
+                    [selected_values]="selected_data_proposed_filter"
+                    [scale]="scale"
+                    [limit_dp]="null"
+                    (has_limit)="setYaxesLimit($event)">
+                </app-chart-cost-vs-time>
+                <mat-grid-list cols="12" class="indicators-container"> 
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                        <div class="indicator optimized"></div>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                        <div class="indicator current"></div>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                        <div class="indicator selected"></div>
+                    </mat-grid-tile>
+                </mat-grid-list> 
+                <mat-grid-list cols="12">
+                    <mat-grid-tile [colspan]="3" class="table-header">
+                        
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header header-top">
+                        OPTIMIZED
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header header-top">
+                        CURRENT
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-header header-top">
+                        SELECTED
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="12" >
+                    <mat-grid-tile [colspan]="3" class="table-header text-left">
+                        <p>CHANGE OUT TIME</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        Every {{ result_data.comparison_data.optimize_change_rate_cycle_time.toFixed(2) }} months
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        Every {{ result_data.comparison_data.change_rate_cycle_time.toFixed(2) }} months
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        Every &nbsp;
+                        <span  *ngIf="selected_data_proposed_filter"> {{ selected_data_proposed_filter.change_out_time.toFixed(2) }} </span>
+                        &nbsp; months
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="12">
+                    <mat-grid-tile [colspan]="3" class="table-header text-left">
+                        <p>FINAL DROP PRESSURE</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        {{ result_data.comparison_data.optimize_change_rate_dp.toFixed(2) }} inch of WC
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        {{ result_data.comparison_data.change_rate_dp.toFixed(2) }} inch of WC
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        <span *ngIf="selected_data_proposed_filter">{{ selected_data_proposed_filter.change_out_pressure_drop.toFixed(2) }} inch of WC </span>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="12">
+                    <mat-grid-tile [colspan]="3" class="table-header text-left">
+                        <p>TOTAL ANNUAL CO2 EMMISSIONS</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        {{ result_data.comparison_data.optimize_co2_lb_year.toFixed(2) }} lbs
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        {{ result_data.comparison_data.co2_lb_year.toFixed(2) }} lbs
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        <span  *ngIf="selected_data_proposed_filter">{{ selected_data_proposed_filter.CO2_emissions.toFixed(2) }} lbs </span>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="12">
+                    <mat-grid-tile [colspan]="3" class="table-header text-left">
+                        <p>TOTAL COST</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        $ {{ result_data.comparison_data.optimize_change_rate_annual_cost.toFixed(2) }}
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        $ {{ result_data.comparison_data.change_rate_annual_cost.toFixed(2) }}
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" class="table-content">
+                        <span  *ngIf="selected_data_proposed_filter"> $ {{ selected_data_proposed_filter.annual_cost.toFixed(2) }} </span>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-card>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+
+
+    <mat-grid-list cols="8"> 
+        <mat-grid-tile [colspan]="4">
+            <button mat-stroked-button class="button-outline">BACK TO COMPARISONS</button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4">
+            <button mat-stroked-button class="button-primary">NEW COMPARISON</button>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

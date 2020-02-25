@@ -1,0 +1,39 @@
+
+<div class="dialog-container">
+    <mat-grid-list cols="12" rowHeight="100px">
+        <mat-grid-tile [colspan]="6">
+            <div class="error-title" >
+                <h1> Error <span>{{ data.code }}</span></h1>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="12">
+        <mat-grid-tile [colspan]="6">
+            <div class="error-title" >
+                <h3> SOMETHING WENT WRONG</h3>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="12" rowHeight="30px">
+        <mat-grid-tile [colspan]="4">
+            <div class="error-divider"></div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [colspan]="10">
+            <div class="error-content">
+                <h5 *ngIf="data.type == 'dp'">
+                    <b>AVERAGE DP WHEN FILTER CHANGE</b> has to be greater or equal than <span> {{ data.message }} inches of H2O</span>
+                </h5>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list class="actions" cols="12" rowHeight="100px">
+        <mat-grid-tile [colspan]="5">
+            <button mat-stroked-button class="button-primary" (click)="edit()">EDIT FIELD</button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="7">
+            <button mat-stroked-button class="button-secondary" (click)="optimize()">OPTIMIZE with {{ data.message }} Dp Value</button>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

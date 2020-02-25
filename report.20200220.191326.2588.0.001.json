@@ -1,0 +1,334 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200220.191326.2588.0.001.json",
+    "dumpEventTime": "2020-02-20T19:13:26Z",
+    "dumpEventTimeStamp": "1582244006966",
+    "processId": 2588,
+    "cwd": "C:\\Users\\Public\\light",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Program Files\\nodejs/node_modules/@angular/cli/bin/ng",
+      "serve",
+      "--verbose"
+    ],
+    "nodejsVersion": "v12.14.1",
+    "wordSize": 32,
+    "arch": "ia32",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.14.1",
+      "v8": "7.7.299.13-node.16",
+      "uv": "1.33.1",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.1",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.14.1/node-v12.14.1-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.14.1/node-v12.14.1.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.14.1/win-x86/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "6.1.7601",
+    "osVersion": "Windows 7 Ultimate Service Pack 1",
+    "osMachine": "i686",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i3-3110M CPU @ 2.40GHz",
+        "speed": 2394,
+        "user": 583568,
+        "nice": 0,
+        "sys": 260350,
+        "idle": 4325642,
+        "irq": 3931
+      },
+      {
+        "model": "Intel(R) Core(TM) i3-3110M CPU @ 2.40GHz",
+        "speed": 2394,
+        "user": 778351,
+        "nice": 0,
+        "sys": 271348,
+        "idle": 4119378,
+        "irq": 1575
+      },
+      {
+        "model": "Intel(R) Core(TM) i3-3110M CPU @ 2.40GHz",
+        "speed": 2394,
+        "user": 360237,
+        "nice": 0,
+        "sys": 205484,
+        "idle": 4603215,
+        "irq": 92040
+      },
+      {
+        "model": "Intel(R) Core(TM) i3-3110M CPU @ 2.40GHz",
+        "speed": 2394,
+        "user": 322266,
+        "nice": 0,
+        "sys": 51012,
+        "idle": 4795533,
+        "irq": 1045
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "Conexión de red inalámbrica",
+        "internal": false,
+        "mac": "6c:71:d9:87:2f:eb",
+        "address": "fe80::3d57:8b2b:3aca:6ab5",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 12
+      },
+      {
+        "name": "Conexión de red inalámbrica",
+        "internal": false,
+        "mac": "6c:71:d9:87:2f:eb",
+        "address": "192.168.0.167",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "ErikZerpa-PC"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+  ],
+  "javascriptHeap": {
+    "totalMemory": 509177856,
+    "totalCommittedMemory": 509177856,
+    "usedMemory": 498576136,
+    "availableMemory": 12198900,
+    "memoryLimit": 520093696,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 262008,
+        "used": 22100,
+        "available": 239908
+      },
+      "new_space": {
+        "memorySize": 1048576,
+        "committedMemory": 1048576,
+        "capacity": 524016,
+        "used": 88932,
+        "available": 435084
+      },
+      "old_space": {
+        "memorySize": 165224448,
+        "committedMemory": 165224448,
+        "capacity": 160860196,
+        "used": 160776144,
+        "available": 84052
+      },
+      "code_space": {
+        "memorySize": 2523136,
+        "committedMemory": 2523136,
+        "capacity": 2169920,
+        "used": 2169920,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 5771264,
+        "committedMemory": 5771264,
+        "capacity": 1564920,
+        "used": 1564920,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 333758464,
+        "committedMemory": 333758464,
+        "capacity": 333440904,
+        "used": 333440904,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 589824,
+        "committedMemory": 589824,
+        "capacity": 513216,
+        "used": 513216,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 524016,
+        "used": 0,
+        "available": 524016
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 368.255,
+    "kernelCpuSeconds": 24.71,
+    "cpuConsumptionPercent": 7.63929,
+    "maxRss": 604205056,
+    "pageFaults": {
+      "IORequired": 1096210,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 7638,
+      "writes": 51811
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "=::": "::\\",
+    "ACLOCAL_PATH": "C:\\Program Files\\Git\\mingw32\\share\\aclocal;C:\\Program Files\\Git\\usr\\share\\aclocal",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\Erik Zerpa\\AppData\\Roaming",
+    "BROWSERSLIST_IGNORE_OLD_DATA": "1",
+    "COMMONPROGRAMFILES": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "ERIKZERPA-PC",
+    "COMSPEC": "C:\\Windows\\system32\\cmd.exe",
+    "CONFIG_SITE": "C:/Program Files/Git/mingw32/etc/config.site",
+    "DISPLAY": "needs-to-be-defined",
+    "EXEPATH": "C:\\Program Files\\Git",
+    "FP_NO_HOST_CHECK": "NO",
+    "HOME": "C:\\Users\\Erik Zerpa",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\Erik Zerpa",
+    "HOSTNAME": "ErikZerpa-PC",
+    "INFOPATH": "C:\\Program Files\\Git\\usr\\local\\info;C:\\Program Files\\Git\\usr\\share\\info;C:\\Program Files\\Git\\usr\\info;C:\\Program Files\\Git\\share\\info",
+    "LANG": "es_ES.UTF-8",
+    "LOCALAPPDATA": "C:\\Users\\Erik Zerpa\\AppData\\Local",
+    "LOGONSERVER": "\\\\ERIKZERPA-PC",
+    "MANPATH": "C:\\Program Files\\Git\\mingw32\\local\\man;C:\\Program Files\\Git\\mingw32\\share\\man;C:\\Program Files\\Git\\usr\\local\\man;C:\\Program Files\\Git\\usr\\share\\man;C:\\Program Files\\Git\\usr\\man;C:\\Program Files\\Git\\share\\man",
+    "MINGW_CHOST": "i686-w64-mingw32",
+    "MINGW_PACKAGE_PREFIX": "mingw-w64-i686",
+    "MINGW_PREFIX": "C:/Program Files/Git/mingw32",
+    "MSYSTEM": "MINGW32",
+    "MSYSTEM_CARCH": "i686",
+    "MSYSTEM_CHOST": "i686-w64-mingw32",
+    "MSYSTEM_PREFIX": "C:/Program Files/Git/mingw32",
+    "NUMBER_OF_PROCESSORS": "4",
+    "OLDPWD": "C:/",
+    "ORIGINAL_PATH": "C:\\Program Files\\Git\\mingw32\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Users\\Erik Zerpa\\bin;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\Git\\cmd;C:\\wamp\\bin\\php\\php5.6.40;C:\\xampp\\php;C:\\Program Files\\nodejs;C:\\Users\\Erik Zerpa\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\Users\\Erik Zerpa\\AppData\\Roaming\\npm",
+    "ORIGINAL_TEMP": "C:/Users/ERIKZE~1/AppData/Local/Temp",
+    "ORIGINAL_TMP": "C:/Users/ERIKZE~1/AppData/Local/Temp",
+    "OS": "Windows_NT",
+    "PATH": "C:\\Users\\Erik Zerpa\\bin;C:\\Program Files\\Git\\mingw32\\bin;C:\\Program Files\\Git\\usr\\local\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Program Files\\Git\\mingw32\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Users\\Erik Zerpa\\bin;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\Git\\cmd;C:\\wamp\\bin\\php\\php5.6.40;C:\\xampp\\php;C:\\Program Files\\nodejs;C:\\Users\\Erik Zerpa\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\Users\\Erik Zerpa\\AppData\\Roaming\\npm;C:\\Program Files\\Git\\usr\\bin\\vendor_perl;C:\\Program Files\\Git\\usr\\bin\\core_perl",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
+    "PKG_CONFIG_PATH": "C:\\Program Files\\Git\\mingw32\\lib\\pkgconfig;C:\\Program Files\\Git\\mingw32\\share\\pkgconfig",
+    "PLINK_PROTOCOL": "ssh",
+    "PROCESSOR_ARCHITECTURE": "x86",
+    "PROCESSOR_IDENTIFIER": "x86 Family 6 Model 58 Stepping 9, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "3a09",
+    "PROGRAMFILES": "C:\\Program Files",
+    "PSModulePath": "C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules\\",
+    "PUBLIC": "C:\\Users\\Public",
+    "PWD": "C:/Users/Public/light",
+    "ProgramData": "C:\\ProgramData",
+    "SESSIONNAME": "Console",
+    "SHELL": "C:\\Program Files\\Git\\usr\\bin\\bash.exe",
+    "SHLVL": "2",
+    "SSH_ASKPASS": "C:/Program Files/Git/mingw32/libexec/git-core/git-gui--askpass",
+    "SYSTEMDRIVE": "C:",
+    "SYSTEMROOT": "C:\\Windows",
+    "TEMP": "C:\\Users\\ERIKZE~1\\AppData\\Local\\Temp",
+    "TERM": "xterm",
+    "TMP": "C:\\Users\\ERIKZE~1\\AppData\\Local\\Temp",
+    "TMPDIR": "C:\\Users\\ERIKZE~1\\AppData\\Local\\Temp",
+    "USERDOMAIN": "ErikZerpa-PC",
+    "USERNAME": "Erik Zerpa",
+    "USERPROFILE": "C:\\Users\\Erik Zerpa",
+    "WEBPACK_DEV_SERVER": "true",
+    "WINDIR": "C:\\Windows",
+    "_": "C:\\Program Files\\nodejs/node",
+    "windows_tracing_flags": "3",
+    "windows_tracing_logfile": "C:\\BVTBin\\Tests\\installpackage\\csilogfile.log"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\Windows\\SYSTEM32\\ntdll.dll",
+    "C:\\Windows\\system32\\kernel32.dll",
+    "C:\\Windows\\system32\\KERNELBASE.dll",
+    "C:\\Windows\\system32\\dbghelp.dll",
+    "C:\\Windows\\system32\\msvcrt.dll",
+    "C:\\Windows\\system32\\WS2_32.dll",
+    "C:\\Windows\\system32\\RPCRT4.dll",
+    "C:\\Windows\\system32\\NSI.dll",
+    "C:\\Windows\\system32\\ADVAPI32.dll",
+    "C:\\Windows\\SYSTEM32\\sechost.dll",
+    "C:\\Windows\\system32\\USER32.dll",
+    "C:\\Windows\\system32\\GDI32.dll",
+    "C:\\Windows\\system32\\LPK.dll",
+    "C:\\Windows\\system32\\USP10.dll",
+    "C:\\Windows\\system32\\IPHLPAPI.DLL",
+    "C:\\Windows\\system32\\WINNSI.DLL",
+    "C:\\Windows\\system32\\PSAPI.DLL",
+    "C:\\Windows\\system32\\USERENV.dll",
+    "C:\\Windows\\system32\\profapi.dll",
+    "C:\\Windows\\system32\\CRYPT32.dll",
+    "C:\\Windows\\system32\\MSASN1.dll",
+    "C:\\Windows\\system32\\bcrypt.dll",
+    "C:\\Windows\\system32\\WINMM.dll",
+    "C:\\Windows\\system32\\IMM32.DLL",
+    "C:\\Windows\\system32\\MSCTF.dll",
+    "C:\\Windows\\system32\\api-ms-win-core-synch-l1-2-0.DLL",
+    "C:\\Windows\\system32\\powrprof.dll",
+    "C:\\Windows\\system32\\SETUPAPI.dll",
+    "C:\\Windows\\system32\\CFGMGR32.dll",
+    "C:\\Windows\\system32\\OLEAUT32.dll",
+    "C:\\Windows\\system32\\ole32.dll",
+    "C:\\Windows\\system32\\DEVOBJ.dll",
+    "C:\\Windows\\system32\\uxtheme.dll",
+    "C:\\Windows\\system32\\mswsock.dll",
+    "C:\\Windows\\System32\\wshtcpip.dll",
+    "C:\\Windows\\System32\\wship6.dll",
+    "C:\\Windows\\system32\\bcryptprimitives.dll",
+    "C:\\Windows\\system32\\dhcpcsvc6.DLL",
+    "C:\\Windows\\system32\\dhcpcsvc.DLL",
+    "C:\\Windows\\system32\\NLAapi.dll",
+    "C:\\Windows\\system32\\napinsp.dll",
+    "C:\\Windows\\system32\\pnrpnsp.dll",
+    "C:\\Windows\\system32\\DNSAPI.dll",
+    "C:\\Windows\\System32\\winrnr.dll",
+    "C:\\Windows\\system32\\cryptbase.dll",
+    "C:\\Windows\\system32\\rasadhlp.dll",
+    "C:\\Windows\\System32\\fwpuclnt.dll",
+    "C:\\Windows\\system32\\apphelp.dll"
+  ]
+}

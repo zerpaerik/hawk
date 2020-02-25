@@ -1,0 +1,113 @@
+<h5 class="color-secondary" *ngIf="!card_details"> {{ create_card ? 'NEW CARD' : 'PAYMENT CARDS' }} </h5>
+<h5 class="color-secondary" *ngIf="card_details"> CARD DETAILS </h5>
+<mat-grid-list cols="2" rowHeight="138px" style="margin-top:-10px" *ngIf="!card_details && !create_card">
+    <mat-grid-tile *ngFor="let card of cards_list ; let i = index">
+        <div class="credit-card" (mouseenter)="toggleOverlayClass[i] = true" (mouseleave)="toggleOverlayClass[i] = false">
+            <div class="overlay" *ngIf="toggleOverlayClass[i]">
+                <button mat-stroked-button class="button-outline top" 
+                    *ngIf="!card.is_default"
+                    (click)="_setDefaultCard(card)">SET AS DEFAULT</button>
+                <div class="divider"></div>
+                <button mat-stroked-button class="button-outline bottom" 
+                    (click)="_openModalConfirmation(card)">
+                    DELETE CARD
+                </button>
+            </div>
+            <p class="default" *ngIf="card.is_default"> DEFAULT </p>
+            <p class="uppercase">{{ card.brand }}</p>
+            <p> 
+                <span> &bull;&bull;&bull;&bull; &nbsp; &bull;&bull;&bull;&bull; &nbsp; &bull;&bull;&bull;&bull; &nbsp; </span>
+                {{ card.last4 }}
+            </p>
+            <h6> <span class="valid-label">GOOD THRU &nbsp;</span> {{ card.exp_month  }} / {{ card.exp_year  }}  </h6>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="credit-card new-card">
+            <button mat-stroke class="button-clear" (click)="newCard()">
+                <mat-icon>add_circle_outline</mat-icon>
+                <p>Add new card</p>
+            </button>
+        </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <!-- NEW CARD -->
+  <div *ngIf="create_card">
+      <mat-grid-list cols="2" rowHeight="138px" style="margin-top:-10px" >
+        <mat-grid-tile>
+            <div class="credit-card no-hover" [class.div-has-error]="card_error">
+                <p>{{ new_card.name }}</p>
+                <p> 
+                    {{ new_card.number.substring(4,0) }}&nbsp;
+                    {{ new_card.number.substring(8,4) }}&nbsp;
+                    {{ new_card.number.substring(12,8) }}&nbsp;
+                    {{ new_card.number.substring(16,12) }} 
+                </p>
+                <h6> {{ new_card.exp_month }}  {{ new_card.exp_month != '' ? '/' : '' }}  {{ new_card.exp_year  }} <span> {{ new_card.cvc }} </span> </h6>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="card-inputs">
+        <mat-label>Card number</mat-label>
+        <input matInput [(ngModel)]="new_card.number" 
+        (ngModelChange)="card_error = false"
+        [class.input-has-error]="card_error">
+    </div>
+    <mat-grid-list cols="12" rowHeight="80px">
+        <mat-grid-tile [colspan]="4">
+            <div class="card-inputs">
+                <mat-label>Name on card</mat-label>
+                <input matInput style="width: 80%;" [(ngModel)]="new_card.name">
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2">
+            <div class="card-inputs">
+                <mat-label>CVC code</mat-label>
+                <input matInput style="width: 60%;" [(ngModel)]="new_card.cvc">
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="6">
+            <div class="date-input">
+                <mat-form-field>
+                    <input matInput [min]="minDate" [matDatepicker]="dp" placeholder="Expiration date" [formControl]="date">
+                    <mat-datepicker-toggle matSuffix [for]="dp" class="date-button"></mat-datepicker-toggle>
+                    <mat-datepicker #dp
+                                    class="date-picker"
+                                    startView="multi-year"
+                                    (yearSelected)="chosenYearHandler($event)"
+                                    (monthSelected)="chosenMonthHandler($event, dp)"
+                                    panelClass="example-month-picker">
+                    </mat-datepicker>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <p *ngIf="card_error" class="error-message"> {{ error_message }} </p>
+    <mat-grid-list cols="11" rowHeight="70px">
+        <mat-grid-tile [colspan]="5">
+            <button mat-stroked-button class="button-outline" (click)="create_card = false">CANCEL</button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1"></mat-grid-tile>
+        <mat-grid-tile [colspan]="5">
+            <button mat-stroked-button class="button-primary" (click)="_saveNewCard()"
+            [disabled]="new_card.number == '' || new_card.name == '' || new_card.cvc == '' ">SAVE NEW CARD</button>
+        </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+
+  <!-- CARD DETAILS -->
+
+  <!-- <mat-grid-list cols="2" rowHeight="138px" style="margin-top:-10px" *ngIf="card_details">
+    <mat-grid-tile>
+        <div class="credit-card">
+            <p>USER NAME</p>
+            <p> 
+                <span> &bull;&bull;&bull;&bull; &nbsp; &bull;&bull;&bull;&bull; &nbsp; &bull;&bull;&bull;&bull; &nbsp; </span>
+                {{ card.number.substring(16,12) }}
+            </p>
+            <h6> {{ card.exp_month  }} / {{ card.exp_year  }} <span> xx {{ card.cvc[2] }} </span> </h6>
+        </div>
+    </mat-grid-tile>
+  </mat-grid-list> -->

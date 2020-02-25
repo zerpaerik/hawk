@@ -1,0 +1,13 @@
+
+.chart-container{
+    width: 100%;
+    height: auto;
+    max-height: 70%;
+    padding-top: 20px;
+    .my-chart{
+        padding-top: 40px;
+        height: auto !important;
+        width: 90% !important;
+        margin-left: 5%;
+    }
+}

@@ -1,0 +1,43 @@
+<div *ngIf="!confirm_view" class="file-dropper-container" appDrag (files)="_filesDropped($event)">
+    <p> Drop your file here to upload <br> or </p>
+    <button mat-stroked-button class="auth-button button-primary"> SELECT FILE
+        <div class="file-container">
+            <input type="file" accept="application/pdf" (change)="fileSelectedChange($event)" class="sd sd-file">
+        </div>
+    </button>
+</div>
+<div *ngIf="confirm_view" class="file-dropper-container confirmed">
+    <div class="confirm-header">
+        <mat-grid-list cols="12" rowHeight="70px">
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <img src="../../../../../assets/imgs/pdf_logo.png">
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="7" [rowspan]="1">
+                <h5> FILE UPLOADED </h5>
+                <p> {{ file_to_upload.name }} </p>
+            </mat-grid-tile>
+            <mat-grid-tile class="col-contact" [colspan]="3" [rowspan]="1">
+                <button mat-stroked-button class="button-clear white" (click)="_clearFile()">Remove file</button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div class="message">
+        <h4>
+            Your file has been uploaded succesfully!
+        </h4>
+        <p>
+            It will take between 24 to 72 hours to validate your report file.<br>
+            Would yo want to wait or would you rather to fill the report data?
+        </p>
+    </div>
+    <div class="confirm-footer">
+        <mat-grid-list cols="12" rowHeight="50px">
+            <mat-grid-tile [colspan]="6" [rowspan]="1">
+                <button mat-stroked-button class="button-secondary" (click)="_sendReport()">Wait for validation</button>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="6" [rowspan]="1">
+                <button mat-stroked-button class="button-primary ">Fill report data</button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>

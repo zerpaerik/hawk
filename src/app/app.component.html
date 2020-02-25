@@ -1,0 +1,6 @@
+<app-header-general *ngIf="outer_header" [active]="link_active"></app-header-general>
+<app-header-logged *ngIf="!outer_header" [active]="link_active"></app-header-logged>
+<router-outlet #routerOutlet="outlet"></router-outlet>
+<app-footer *ngIf="outer_header"></app-footer>
+<!-- <app-report-file-dropper></app-report-file-dropper> -->
+<!-- <app-footer-logged *ngIf="outer_header"></app-footer-logged> -->

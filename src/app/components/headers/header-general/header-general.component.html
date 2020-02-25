@@ -1,0 +1,25 @@
+<div class="header">
+    <div class="header-logo">
+        <img src="../../../../assets/imgs/logo.svg" (click)="_goLanding()">
+    </div>
+    <div class="header-actions">
+        <mat-grid-list cols = "6" rowHeight = "50px">
+            <mat-grid-tile
+            [colspan] = "3"
+            [rowspan] = "1">
+                <button mat-stroked-button class="button-clear white" [class.tealish]="link_active=='new'" (click)="_uploadFile()">FREE OPTIMIZATION</button>
+            </mat-grid-tile>
+            <mat-grid-tile
+            [colspan] = "1"
+            [rowspan] = "1">
+                <button mat-stroked-button class="button-clear white" [class.tealish]="link_active=='login'" (click)="_goLogin()">LOGIN</button>
+            </mat-grid-tile>
+            <mat-grid-tile
+            class="col-contact"
+            [colspan] = "2"
+            [rowspan] = "1">
+                <button mat-stroked-button class="button-clear white" [class.tealish]="link_active=='register'" (click)="_goRegister()">REGISTER</button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="auth-content">
+  <!-- <img src=""> -->
+  <div class="auth-card">
+      <img src="../../../../assets/imgs/sonicu.jpg">
+      <div class="auth-form">
+
+              <input class="base-input" [(ngModel)]="loginDataSonicu.username" [type]="'text'"
+                  placeholder="SONICU USERNAME" (ngModelChange)="log_error = ''">
+              <br><br>
+              <div class="input-password">
+              <input class="base-input" [(ngModel)]="loginDataSonicu.password" [type]="hide ? 'password' : 'text'"
+                  placeholder="SONICU PASSWORD" (ngModelChange)="log_error = ''">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              </div>
+              <br>
+              <input class="base-input" [(ngModel)]="loginDataSonicu.client_id" [type]=" 'text'"
+                  placeholder="CLIENT ID" (ngModelChange)="log_error = ''">
+              <br><br>
+              <div class="input-password">
+              <input class="base-input" [(ngModel)]="loginDataSonicu.client_secret" [type]="hide ? 'password' : 'text'"
+                  placeholder="CLIENT SECRET" (ngModelChange)="log_error = ''">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide client_secret'"
+                  [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              </div>
+              <br>
+
+          <p class="label-error"> {{ log_error }} </p>
+          <button mat-stroked-button class="auth-button button-primary" (click)="_doLoginSonicu()"
+              [disabled]="loginDataSonicu.username== '' ||  loginDataSonicu.password=='' || loginDataSonicu.client_id== '' || loginDataSonicu.client_secret== ''"> CONECT ACCOUNTS
+          </button>
+
+      </div>
+  </div>
+</div>

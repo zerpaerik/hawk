@@ -1,0 +1,156 @@
+.main-content{
+    padding-left: 25px;
+    padding-right: 25px;
+    width: auto;
+    display: block;
+    width: 84%;
+    margin-left: 8%;
+}
+
+mat-card{
+    border: 1px solid rgba(0,0,0,0.15) !important;
+}
+
+.content-header{
+    
+    width: 90%;
+    height: 60px;
+    display: inline-flex;
+    align-items: center;
+    button{
+        position: absolute;
+        right: 25px;
+        height: 35px;
+        width: auto !important;
+        border: none !important;
+        mat-icon{
+            font-size: 30px !important;        
+        }
+    }
+    h3{
+        color:#2c00a0;
+    }
+    mat-icon{
+        cursor: pointer;       
+    }
+}
+
+
+.card-header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 90%;
+    align-items: center;
+    text-align: center;
+    h2{
+        font-size: 18px;
+        width: 100%;
+        font-weight: 400;
+        text-align: center;
+        span{
+            font-size: 24px;
+            font-weight: 700;
+        }
+    }
+    h5{
+        text-align: left;
+        color: #2c00a0;
+    }
+    h4{
+        font-weight: 400;
+    }
+    p{
+        font-size: 14px;
+    }
+    img{
+        width: 150px;
+        height: 150px;
+    }
+    .image-container{
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 40%;
+        height: 40%;
+        margin-left: 30%;
+    }
+}
+
+.full-card{
+    margin-left: 0px !important;
+    width: 95% !important;
+    height: 64%;
+}
+
+.no-margin{
+    margin-left: 0px !important;
+}
+
+.filter-info{
+    margin-top: -20px;
+    width: 100%;
+    background-color: #f7f7f7;
+    height: auto;
+    padding: 5px;
+    h5{
+        color: black;
+        margin: 10px;
+        font-size: 11px;    
+    }
+}
+
+.filter-image{
+    img{
+        width: 60%;
+    }
+    h3{
+        margin-top: 0px;
+        font-size: 16px;
+        color:#2c00a0;
+    }
+}
+
+.text-left{
+    p{
+        font-size: 11px !important;
+        text-align: left;
+    }
+}
+
+.legend{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: 18px;
+}
+
+.circle{
+    width: 14px;
+    height: 14px;
+    border: 1px solid #2c00a0;
+    border-radius: 50%;
+}
+
+.savings-legend{
+    position: absolute;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-content: left;
+    text-align: left;
+    top: 0px;
+}
+
+.savings-chart-container{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 50%;
+    display: grid;
+    align-items: center;
+}

@@ -1,0 +1,216 @@
+<div class="cases-container">
+    <div class="content-header">
+        <h3> STUDY CASES </h3>
+        <mat-grid-list cols="12" rowHeight="50px">
+            <mat-grid-tile [colspan]="9">
+                <div class="searchbar-container">
+                    <input type="text" placeholder="Search for a study case">
+                    <mat-icon>search</mat-icon>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="3">
+                <button mat-stroked-button class="button-primary">NEW CASE</button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+
+    <owl-carousel-o [options]="customOptions">
+        <ng-template 
+            *ngFor="let case of cases; let i = index "
+            carouselSlide 
+            class="carousel-item">
+            <div class="case-card" [class.selected]="case.selected" (click)="setOriginalCase(case,i)">
+                <h5> {{ case.name }} </h5>
+                <h6> <b>CURRENT FILTER:</b> {{ case.model_filter_name }} </h6>
+                <img src="{{ case.model_filter_image }}">
+                <p>Filter change date: 12 12/2020</p>
+                <mat-divider></mat-divider>
+                <mat-card-actions>
+                    <button mat-button (click)="_viewOptimization(case)">  VIEW OPTIMIZATION</button>
+                    <button mat-button (click)="_editCase(case)">VIEW DETAILS</button>
+                </mat-card-actions>
+                <button *ngIf="case.selected" mat-icon-button color="dark" class="more" [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="_editCase(case)">
+                        <span>Edit</span>
+                    </button>
+                    <button mat-menu-item >
+                        <span>Eliminate</span>
+                    </button>
+                    <button mat-menu-item (click)="_duplicateCase(case)">
+                        <span>Duplicate</span>
+                    </button>
+                    <button mat-menu-item (click)="unMarkCase(i)">
+                        <span> Unmark this case</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </ng-template> 
+    </owl-carousel-o>   
+</div>
+<br>
+<div class="carousel-container">
+    <mat-grid-list cols="12" rowHeight="50px" *ngIf="step == 1"> 
+        <mat-grid-tile [colspan]="6">
+            <h5 class="color-secondary"> SELECT PROPOSED FILTER </h5>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="6">
+            <div class="searchbar-container">
+                <input type="text" placeholder="Search for a model filter">
+                <mat-icon>search</mat-icon>
+                <button mat-button class="button-clear tealish" (click)="_openSearchModal()"> 
+                    <i class='fa fa-angle-down'></i>
+                </button>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="12" rowHeight="30px" *ngIf="step == 1 && filters_search_result.length > 0"> 
+        <mat-grid-tile [colspan]="12">
+            <h6 class="color-secondary text-results"> 
+                {{ filters_search_result.length }} Results from advanced search &nbsp; 
+                <span (click)="clearFiltersFilter()"> (CLEAR SEARCH) </span> 
+            </h6>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="12" rowHeight="120px" *ngIf="step == 1 && filters && filters.length == 0"> 
+        <mat-grid-tile [colspan]="12">
+            <div class="no-results">
+                <h3> Sorry, no filters found </h3>
+                <h6 class="color-secondary"> 
+                    We didn't find any filters that match with your search
+                </h6>
+                <button mat-button class="button-outline" (click)="clearFiltersFilter()"> VIEW ALL FILTERS </button>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="filters-carousel-container">      
+        <owl-carousel-o [options]="customOptions" *ngIf="step == 1">
+            <ng-template 
+                *ngFor="let filter of filters; let i = index "
+                carouselSlide 
+                class="carousel-item">
+                <div [class.selected] = "filter.selected" (click)="setProposedFilter(filter,i)">
+                    <img src="{{ filter.picture }}">
+                    <p> {{ filter.name}} </p>
+                    <h6> {{ filter.manufacturer.name }} </h6>
+                </div>
+            </ng-template> 
+        </owl-carousel-o>  
+        
+        <div *ngIf="step == 2" style="position: relative;">
+            <mat-grid-list cols="12" rowHeight="300px"> 
+                <mat-grid-tile [colspan]="2" style="margin-top: -25px;">
+                    <div class="filter-info">
+                        <h3> {{ proposed_filter.name }}  </h3>
+                        <h6 *ngIf="original_case"> VS {{ original_case.current_filter.name }} </h6>
+                        <img src="{{ proposed_filter.picture }}">
+                        <p> MANUFACTURER: {{ proposed_filter.manufacturer.name }} </p>
+                    </div>                   
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" style="margin-top: -20px;">
+                    <div class="filter-info">
+                        <h5> EFFICIENCY  </h5>
+                        <h6> {{ proposed_filter.efficiency }} % </h6><br>
+                        <h5> MANUFACTURER  </h5>
+                        <h6> {{ proposed_filter.manufacturer.name }} </h6><br>
+                        <h5> FRAME MATERIAL  </h5>
+                        <h6> {{ proposed_filter.frame_material }} </h6><br>
+                        <h5> MEDIA TYPE  </h5>
+                        <h6> {{ proposed_filter.media_type }} </h6><br>
+                        <h5> NOMINAL SIZE  </h5>
+                        <h6> {{ proposed_filter.size_width }} x {{ proposed_filter.size_height }} x {{ proposed_filter.size_depth }} </h6>
+                    </div>
+                </mat-grid-tile>
+                <!-- <mat-grid-tile [colspan]="4">
+                    <div class="case-input no-margin">
+                        <mat-label><b>OTHER COSTS PER CYCLE</b></mat-label>
+                        <input class="custom-select input-currency input-additional" name="additional_costs_per_cycle" 
+                        matInput disabled>
+                        <button mat-stroked-button class="button-secondary" class="more-costs" (click)="addMoreCostPerCycle()"> 
+                            <mat-icon>edit</mat-icon> 
+                        </button>
+                    </div>
+                </mat-grid-tile> -->
+                <mat-grid-tile [colspan]="4" >
+                    <div class="tile-top">
+                        <div class="case-input no-margin">
+                            <mat-label>FILTER UNIT COST</mat-label>
+                            <input class="custom-select input-currency input-number" type="number" (blur)="setAmountDecimal($event)" matInput [(ngModel)]="proposed_filter.filter_cost">
+                        </div> 
+                        <div class="divider"></div>
+                        <div class="case-input no-margin">
+                            <mat-label>LABOR COST</mat-label>
+                            <input class="custom-select input-currency input-number" type="number" (blur)="setAmountDecimal($event)" matInput [(ngModel)]="proposed_filter.labor_cost" (ngModelChange)="updateCosts()">
+                        </div>
+                        <div class="divider"></div>
+                        <div class="case-input no-margin">
+                            <mat-label>DISPOSAL COST</mat-label>
+                            <input class="custom-select input-currency input-number" type="number" (blur)="setAmountDecimal($event)" matInput [(ngModel)]="proposed_filter.disposal_cost" (ngModelChange)="updateCosts()">
+                        </div> 
+                        <div class="divider"></div>
+                        <div class="case-input no-margin">
+                            <mat-label>FREIGHT COST</mat-label>
+                            <input class="custom-select input-currency input-number" type="number" (blur)="setAmountDecimal($event)" matInput [(ngModel)]="proposed_filter.freight_cost" (ngModelChange)="updateCosts()">
+                        </div>   
+                    </div>
+                </mat-grid-tile>
+                
+                <mat-grid-tile [colspan]="4" >
+                    <div class="tile-top">
+                        <div class="case-input no-margin">
+                            <mat-label><b>OTHER COSTS PER CYCLE</b></mat-label>
+                            <input class="custom-select input-currency input-additional" name="additional_costs" 
+                            matInput disabled [(ngModel)]="proposed_filter.additional_costs" 
+                            *ngIf="proposed_filter.additional_costs">
+                            <button mat-stroked-button class="button-secondary" class="more-costs" (click)="addMoreCostPerCycle()"> 
+                                <mat-icon>edit</mat-icon> 
+                            </button>
+                        </div>              
+                        <div class="divider"></div>
+                        <div class="case-input no-margin">
+                            <mat-label><b>OTHER ANNUAL COSTS</b></mat-label>
+                            <input class="custom-select input-currency input-additional" name="additional_costs_per_cycle" 
+                            matInput disabled *ngIf="proposed_filter.annual_cost" [(ngModel)]="proposed_filter.annual_cost">
+                            <button mat-stroked-button class="button-secondary" class="more-costs" (click)="addAnnualCosts()"> 
+                                <mat-icon>edit</mat-icon> 
+                            </button>
+                        </div>
+                    </div>
+                </mat-grid-tile>
+                
+            </mat-grid-list>
+            <button class="btn-close" mat-mini-fab (click)="clearProposedFilter()">X</button>
+        </div>
+        
+        <br>
+        <mat-grid-list cols="12" rowHeight="50px"> 
+            <mat-grid-tile [colspan]="6">
+                <button 
+                    mat-stroked-button 
+                    (click)="_cancel()"
+                    class="button-outline">
+                    CANCEL
+                </button>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="6">
+                <button 
+                *ngIf="step == 1"
+                mat-stroked-button class="button-primary" 
+                (click)="continue()"
+                [disabled]="!original_case || !proposed_filter">
+                    CONTINUE
+                </button>
+                <button 
+                *ngIf="step == 2"
+                (click)="compare()"
+                mat-stroked-button class="button-primary" [disabled]="!original_case">
+                    COMPARE
+                </button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <br>
+</div>

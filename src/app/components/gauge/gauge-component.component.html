@@ -1,0 +1,145 @@
+<div class="gauge-container">
+    <kendo-radialgauge [pointer]="{ value: value,color:'#e6e7e8 ',display:'none'}" [transitions]="false" style="display:block;height:100px;">
+        <kendo-radialgauge-scale [minorUnit]="5" [majorUnit]="10" [max]="100" [rangeSize]="5" [majorTicks]="{ visible: false }"
+        [minorTicks]="{ visible: false }">
+            <kendo-radialgauge-scale-labels [visible]="false">
+            </kendo-radialgauge-scale-labels>
+            <kendo-radialgauge-scale-ranges>
+            <kendo-radialgauge-scale-range *ngIf='gaugeValue == 0 ||  !gaugeValue' [from]="0" [to]="100" color="#ccc" line="1">
+            <!--  Values from 0 to 10 -->
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range *ngIf='gaugeValue >= 1' [from]="0" [to]="2" color="#13005b">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range *ngIf='gaugeValue >= 2' [from]="2" [to]="4" color="#13005b">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range *ngIf='gaugeValue >= 4' [from]="4" [to]="6" color="#13005b">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range *ngIf='gaugeValue >= 6' [from]="6" [to]="8" color="#13005b">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range *ngIf='gaugeValue >= 8' [from]="8" [to]="10" color="#13005b">
+            </kendo-radialgauge-scale-range>
+    
+            <!--  Values from 10 to 20 -->
+            <kendo-radialgauge-scale-range [from]="10" [to]="12" *ngIf='gaugeValue >= 10' color="#1f0191">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="12" [to]="14" *ngIf='gaugeValue >= 12' color="#1f0191">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="14" [to]="16" *ngIf='gaugeValue >= 14' color="#1f0191">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="16" [to]="18" *ngIf='gaugeValue >= 16' color="#1f0191">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="18" [to]="20" *ngIf='gaugeValue >= 18' color="#1f0191">
+            </kendo-radialgauge-scale-range>
+    
+            <!--  Values from 20 to 30 -->                                                      
+            <kendo-radialgauge-scale-range [from]="20" [to]="22" *ngIf='gaugeValue >= 20' color="#2a00cc">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="22" [to]="24" *ngIf='gaugeValue >= 22' color="#2a00cc">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="24" [to]="26" *ngIf='gaugeValue >= 24' color="#2a00cc">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="26" [to]="28" *ngIf='gaugeValue >= 26' color="#2a00cc">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="28" [to]="30" *ngIf='gaugeValue >= 28' color="#2a00cc">
+            </kendo-radialgauge-scale-range>
+    
+            <!--  Values from 30 to 40 -->                                                      
+            <kendo-radialgauge-scale-range [from]="30" [to]="32" *ngIf='gaugeValue >= 30' color="#0000ff">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="32" [to]="34" *ngIf='gaugeValue >= 32' color="#0000ff">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="34" [to]="36" *ngIf='gaugeValue >= 34' color="#0000ff">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="36" [to]="38" *ngIf='gaugeValue >= 36' color="#0000ff">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="38" [to]="40" *ngIf='gaugeValue >= 38' color="#0000ff">
+            </kendo-radialgauge-scale-range>
+    
+            <!--  Values from 40 to 50 -->                                                      
+            <kendo-radialgauge-scale-range [from]="40" [to]="42" *ngIf='gaugeValue >= 40' color="#005dba">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="42" [to]="44" *ngIf='gaugeValue >= 42' color="#005dba">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="44" [to]="46" *ngIf='gaugeValue >= 44' color="#005dba">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="46" [to]="48" *ngIf='gaugeValue >= 46' color="#005dba">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="48" [to]="50" *ngIf='gaugeValue >= 48' color="#005dba">
+            </kendo-radialgauge-scale-range>
+    
+            <!--  Values from 50 to 60 -->                                                      
+            <kendo-radialgauge-scale-range [from]="50" [to]="52" *ngIf='gaugeValue >= 50' color="#0095b7">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="52" [to]="54" *ngIf='gaugeValue >= 52' color="#0095b7">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="54" [to]="56" *ngIf='gaugeValue >= 54' color="#0095b7">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="56" [to]="58" *ngIf='gaugeValue >= 56' color="#0095b7">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="58" [to]="60" *ngIf='gaugeValue >= 58' color="#0095b7">
+            </kendo-radialgauge-scale-range>
+    
+            <!--  Values from 60 to 70 -->                                                      
+            <kendo-radialgauge-scale-range [from]="60" [to]="62" *ngIf='gaugeValue >= 60' color="#00a8a5">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="62" [to]="64" *ngIf='gaugeValue >= 62' color="#00a8a5">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="64" [to]="66" *ngIf='gaugeValue >= 64' color="#00a8a5">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="66" [to]="68" *ngIf='gaugeValue >= 66' color="#00a8a5">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="68" [to]="70" *ngIf='gaugeValue >= 68' color="#00a8a5">
+            </kendo-radialgauge-scale-range>
+    
+            <!--  Values from 70 to 80 -->                                                      
+            <kendo-radialgauge-scale-range [from]="70" [to]="72" *ngIf='gaugeValue >= 70' color="#00a889">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="72" [to]="74" *ngIf='gaugeValue >= 72' color="#00a889">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="74" [to]="76" *ngIf='gaugeValue >= 74' color="#00a889">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="76" [to]="78" *ngIf='gaugeValue >= 76' color="#00a889">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="78" [to]="80" *ngIf='gaugeValue >= 78' color="#00a889">
+            </kendo-radialgauge-scale-range>
+    
+            <!--  Values from 80 to 90 -->                                                      
+            <kendo-radialgauge-scale-range [from]="80" [to]="82" *ngIf='gaugeValue >= 80' color="#00a86a">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="82" [to]="84" *ngIf='gaugeValue >= 82' color="#00a86a">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="84" [to]="86" *ngIf='gaugeValue >= 84' color="#00a86a">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="86" [to]="88" *ngIf='gaugeValue >= 86' color="#00a86a">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="88" [to]="90" *ngIf='gaugeValue >= 88' color="#00a86a">
+            </kendo-radialgauge-scale-range>
+    
+            <!--  Values from 90 to 100 -->                                                      
+            <kendo-radialgauge-scale-range [from]="90" [to]="92" *ngIf='gaugeValue >= 90' color="#00a832">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="92" [to]="94" *ngIf='gaugeValue >= 92' color="#00a832">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="94" [to]="96" *ngIf='gaugeValue >= 94' color="#00a832">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="96" [to]="98" *ngIf='gaugeValue >= 96' color="#00a832">
+            </kendo-radialgauge-scale-range>
+            <kendo-radialgauge-scale-range [from]="98" [to]="100" *ngIf='gaugeValue >= 98' color="#00a832">
+            </kendo-radialgauge-scale-range>
+
+            <!--  Values greather than 100 -->                                                      
+            <kendo-radialgauge-scale-range [from]="0" [to]="100" *ngIf='gaugeValue > 100' color="#c90000">
+            </kendo-radialgauge-scale-range>
+
+            <!--  Values greather below 0 -->                                                      
+            <kendo-radialgauge-scale-range [from]="0" [to]="100" *ngIf='gaugeValue < 0' color="#e62b25">
+            </kendo-radialgauge-scale-range>
+            
+            </kendo-radialgauge-scale-ranges>
+            </kendo-radialgauge-scale>
+        </kendo-radialgauge>
+        <div class="gauge-text">
+            <input type="number" class="gauge-value input-porcent" [(ngModel)]="gaugeValue" (focusout)='changeValue()'/>
+        </div>
+    </div>
+      

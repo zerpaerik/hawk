@@ -1,0 +1,77 @@
+
+<div class="auth-content" *ngIf="!showTC">
+        <!-- <img src=""> -->
+        <div class="auth-card">
+            <img src="../../../../assets/imgs/header-iamge2.png">
+            <div class="auth-form">
+                <h3> Register </h3>
+                <input class="base-input" 
+                    [(ngModel)]="registerData.username" type="text" placeholder="* USERNAME" required>
+                <br><br>
+                <input class="base-input" 
+                    [formControl]="email" required type="email" 
+                    [(ngModel)]="registerData.email"  
+                    [class.input-error]="email.invalid && email.touched"
+                    placeholder="* EMAIL">
+                <br *ngIf="email.invalid && email.touched">
+                <mat-error *ngIf="email.invalid && email.touched ">{{getErrorMessage()}}</mat-error>
+                <br><br *ngIf="!(email.invalid && email.touched)">
+                <div class="divider" *ngIf="email.invalid && email.touched"></div>
+                <div class="input-password">
+                    <input 
+                        required 
+                        class="base-input" 
+                        [(ngModel)]="registerData.password" 
+                        [formControl]="password" 
+                        [type]="hide ? 'password' : 'text'" 
+                        [class.input-error]="(registerData.password.length < 8) && (password.dirty)"
+                        placeholder="* PASSWORD" >
+                    <button mat-icon-button matSuffix 
+                        (click)="hide = !hide" 
+                        [attr.aria-label]="'Hide password'" 
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </div>
+                <div *ngIf="(registerData.password.length < 8) && (password.dirty)">
+                    <mat-error style="margin-bottom: 5px;">{{ getPasswordErrorMessage() }}</mat-error>
+                </div>
+                <br>
+                <div class="input-password">
+                    <input 
+                        required
+                        [formControl]="confirm_password"
+                        class="base-input" 
+                        [(ngModel)]="registerData.confirm_password" 
+                        [type]="hide_confirm ? 'password' : 'text'" 
+                        [class.input-error]="(registerData.password != registerData.confirm_password) && (confirm_password.dirty)"
+                        placeholder="* CONFIRM PASSWORD">
+                    <button mat-icon-button matSuffix 
+                        (click)="hide_confirm = !hide_confirm" 
+                        [attr.aria-pressed]="hide_confirm">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </div>
+                <div class="divider" *ngIf="!((registerData.password != registerData.confirm_password) && (confirm_password.dirty))"></div>
+                <div *ngIf="(registerData.password != registerData.confirm_password) && (confirm_password.dirty)">
+                    <mat-error>{{getMissMatchPasswordErrorMessage()}}</mat-error>
+                    <br>
+                </div>
+                <p class="label-error" *ngFor="let errors of register_errors"> {{ errors }}</p>
+                <button 
+                    mat-stroked-button 
+                    class="auth-button button-primary" 
+                    (click)="_tryRegister()"
+                    [disabled]="
+                        registerData.email == '' ||  
+                        registerData.password=='' ||  
+                        registerData.confirm_password=='' ||  
+                        registerData.username=='' ||
+                        email.invalid ||
+                        registerData.confirm_password != registerData.password"> REGISTER
+                </button>
+                <p class="footer-comment"> Already have an account? <span (click)="_goLoginPage()"> Sing in </span> </p>
+            </div>
+        </div>
+    </div>
+    <app-terms-and-conditions *ngIf="showTC" (continue)="_continue()"  (cancel)="showTC = false"></app-terms-and-conditions>

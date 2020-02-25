@@ -1,0 +1,100 @@
+<div class="main-content">
+    <div class="content-header">
+        <h3> PROFILE SETTINGS </h3>
+    </div>
+    
+    <mat-grid-list cols = "12"  rowHeight="215px">
+        <mat-grid-tile
+        [colspan] = "12"
+        [rowspan] = "1">
+            <mat-card class="section-card" >
+                <mat-grid-list cols="9">
+                    <mat-grid-tile [colspan] = "1">
+                        <div class="profile-image-container">
+                            <img src="{{ user_data.profile_image }}">
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan] = "8">
+                        <div class="profile-data">
+                            <h5 class="color-secondary"> PERSONAL INFORMATION </h5>
+
+                            <mat-grid-list cols="9">
+                                <mat-grid-tile [colspan]="3"> 
+                                    <div class="col-data">
+                                        <mat-label class="color-secondary"> FULL NAME </mat-label>
+                                        <p> {{ user_data.first_name }} {{ user_data.last_name }} </p>
+                                    </div>
+                                </mat-grid-tile>
+                                <mat-grid-tile [colspan]="3"> 
+                                    <div class="col-data">
+                                        <mat-label class="color-secondary"> EMAIL </mat-label>
+                                        <p> {{ user_data.email }} </p>
+                                    </div>
+                                </mat-grid-tile>
+                                <mat-grid-tile [colspan]="3"> 
+                                    <div class="col-data">
+                                        <mat-label class="color-secondary"> PHONE </mat-label>
+                                        <p> {{ user_data.phone }} </p>
+                                    </div>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                        </div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="divider"></div>
+    <div class="divider"></div>
+    <mat-grid-list cols = "12"  rowHeight="440px">
+        <mat-grid-tile 
+        [colspan] = "4"
+        [rowspan] = "1">
+            <mat-card class="section-card padding-right"  >
+                <mat-list role="list">
+                    <mat-list-item class="item-button" role="listitem">
+                        <button mat-stroked-button class="button-clear" 
+                        [class.active]="profile_option[0]"
+                        (click)="_openProfileSection(0)"> CHANGE PASSWORD </button>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item role="listitem">
+                        <button mat-stroked-button class="button-clear" 
+                        [class.active]="profile_option[1]"
+                        (click)="_openProfileSection(1)"> PAYMENT CARDS </button>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item role="listitem">
+                        <button mat-stroked-button class="button-clear" 
+                        [class.active]="profile_option[2]"
+                        (click)="_openProfileSection(2)"> MY SUBSCRIPTIONS  </button>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item role="listitem">
+                        <button mat-stroked-button class="button-clear" 
+                        [class.active]="profile_option[3]"
+                        (click)="_openProfileSection(3)"> PLANS  </button>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile 
+        [colspan] = "8"
+        [rowspan] = "1">
+            <mat-card class="section-card padding-left">
+                <div *ngIf="profile_option[0]">
+                    <h5> CHANGE PASSWORD </h5>
+                </div>
+                <div *ngIf="profile_option[1]">    
+                    <app-credit-cart-list-page></app-credit-cart-list-page>
+                </div>
+                <div *ngIf="profile_option[2]">
+                    <app-subscriptions-list (show_plans)="_openProfileSection(3)"></app-subscriptions-list>
+                </div>
+                <div *ngIf="profile_option[3]">
+                    <app-plans-list (created)="_openProfileSection(2)"></app-plans-list>
+                </div>                
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

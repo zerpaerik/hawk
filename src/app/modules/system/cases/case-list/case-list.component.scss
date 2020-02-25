@@ -1,0 +1,162 @@
+.main-content{
+    padding-left: 25px;
+    padding-right: 25px;
+    width: auto;
+    display: block;
+}
+
+.case-card{
+    height: 88%;
+    border-radius: 8px;
+    box-shadow: 0 2px 3px 0 rgba(173, 173, 173, 0.5);
+    background-color: #ffffff;
+    text-align: center;
+    position: relative;
+    width: 95% !important;
+    display: grid;
+    justify-content: center;
+    p{
+        font-size: 10px;
+        margin-top: -7.5px;
+        color: #aaa;
+    }
+    img{
+        width: 46% !important;
+        height: auto !important;
+        justify-self: center;
+    }
+    h5{
+        color:#2c00a0;
+        font-size: 14px;
+        font-weight: 500;
+        margin-top: -5px;
+        margin-bottom: 10px;
+    }
+    h6{
+        font-size: 11px;
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
+    button{
+        color:#21b3ad;
+        font-size: 10px;
+        font-weight: 400;
+    }
+    .more{
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        color:#000;
+        .mat-icon{
+            font-size: 24px;
+        }
+    }
+    .button-card-top-left{
+        transform: rotateY(180deg);
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        color:#000;
+        .mat-icon{
+            font-size: 24px;
+        }
+    }
+    .rotate{
+        transform: rotate(90deg);
+    }
+    .case-chart-legend{
+        width: 66%;
+        margin-left: 17%;
+        p{
+            margin-top: 0px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 11px;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            span{
+                justify-self: right;;
+                float: right;
+                font-weight: 600;
+                position: absolute;
+                right: 17%;
+            }
+        }
+    }
+    .case-card-content{
+        background-clip: red !important;
+    }
+    .case-card-chart-container{
+        position: absolute;
+        top: 15%;
+        height: 65%;
+        width: 100%;
+    }
+}
+
+button.mat-menu-item {
+    width: 100%;
+    height: 30px;
+    font-size: 11px;
+    line-height: 0px;
+}
+
+.content-header{
+    width: 100%;
+    height: 60px;
+    display: inline-flex;
+    align-items: center;
+    button{
+        position: absolute;
+        right: 25px;
+        height: 35px;
+    }
+    h3{
+        color:#2c00a0;
+    }
+    mat-icon{
+        cursor: pointer;
+    }
+}
+
+
+.compare-table{
+    width: 100%;
+  }
+  
+  tr {
+    display: inline;
+  }
+  td {
+      margin: 0;
+      padding: 0;
+      width: 50%;
+      float: left;
+      background: #d8d8d8;
+  } 
+  
+  @media all and (min-width: 900px) {
+    
+    tr {
+      display: table-row;
+    }
+    td {
+      float: none;
+      min-width: 300px;
+    } 
+  }
+  
+
+::ng-deep .selected-text {
+    color: #2c00a0 !important;
+    // background-color:rgba(36, 182, 177, 0.555) !important;
+    background-color: yellow;
+    font-weight: 500 !important; 
+}
+
+.mat-card-actions, .mat-card-content, .mat-card-subtitle {
+    display: block;
+    margin-bottom: 0px !important;
+}

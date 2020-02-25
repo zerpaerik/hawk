@@ -1,0 +1,140 @@
+
+.main-content{
+    padding-left: 25px;
+    padding-right: 25px;
+    width: auto;
+    display: block;
+}
+
+.content-header{
+    width: 50% !important;
+    height: 60px;
+    display:flex;
+    align-items: center;
+    button{
+        position: absolute;
+        width: auto;
+        right: 25px;
+        height: 35px;
+    }
+    h3{
+        color:#2c00a0;
+    }
+    mat-icon{
+        cursor: pointer;
+    }
+}
+
+.comparisons{
+    height: 91%;
+    width: 96%;
+    border-radius: 8px;
+    box-shadow: 0 2px 3px 0 rgba(173, 173, 173, 0.5);
+    background-color: #ffffff;
+    display: block;
+    
+}
+
+.comparison-card{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    h5{
+        font-size: 11px;
+        font-weight: 450;
+        margin: 10px;
+    }
+    h6{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    p{
+        font-size: 10px;
+        margin: 0px;
+    }
+    img{
+        width: 90px;
+        height: 90px;
+    }
+}
+
+.comparison-card:hover{
+    background-color: #f7f8f9;
+}
+
+
+
+.comparison-list{
+    width: 90%;
+    margin-left: 5%;
+    mat-grid-list{
+        height: 300px;
+    }
+    mat-grid-tile{
+        height: 300px;
+    }
+}
+
+.mat-card-actions, .mat-card-content, .mat-card-subtitle {
+    display: block;
+    padding:0px 0px;
+    margin-bottom: 0px !important; 
+}
+
+
+button.mat-menu-item {
+    width: 100%;
+    height: 30px;
+    font-size: 11px;
+    line-height: 0px;
+}
+
+.section-card{
+    width: 96% !important;
+    margin-left: 2%;
+    margin-top: 19px;
+    align-self: baseline;
+    border-radius: 8px;
+    height: 73%;
+    box-shadow: 0 2px 3px 0 rgba(173, 173, 173, 0.5);
+    max-height: 73%;
+    overflow-y: scroll;
+}
+
+.comparisons-list-container{
+    height: 86% !important;
+}
+
+.new-card{
+    height: 146px;
+    display: grid;
+    align-items: center;
+    padding: 0;
+    border-radius: 10px;
+    width: 80%;
+    background-color: #f6f7f8;
+    border: none;
+    p{
+        font-size: 10px;
+        padding-top: 5px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+    border-radius: 8px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); 
+}

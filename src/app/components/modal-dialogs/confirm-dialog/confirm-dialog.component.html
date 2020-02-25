@@ -1,0 +1,12 @@
+<div class="dialog-container">
+    <h3 class="color-primary"> DELETE CONFIRMATION </h3>
+    <p>ARE YOU SURE YOU WANT TO DELETE THIS {{ data }}</p>
+    <mat-grid-list cols = "12">
+        <mat-grid-tile [colspan]="6">
+            <button mat-stroked-button class="button-outline" (click)="delete()">YES</button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="6">
+            <button mat-stroked-button class="button-primary" (click)="cancel()">NO</button>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

@@ -1,0 +1,120 @@
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <mat-form-field>
+    <input matInput>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="done()" cdkFocusInitial>Ok</button>
+</div> -->
+<div class="modal-header">
+    <p> Variable airflow </p>
+    <button mat-icon-button>
+        <mat-icon class="white" (click)="onNoClick()">cancel</mat-icon>
+    </button>
+</div>
+<div class="modal-content">
+    
+    <mat-grid-list cols="12" rowHeight="72px">
+        <mat-grid-tile [colspan]="2">
+            <div class="position">
+                1
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="5">
+            <div class="input-container">
+                <mat-label class="input-label">AIRFLOW</mat-label>
+                <input matInput  class="input-airflow" [(ngModel)]="data[0].flow">
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="5">
+            <div class="input-container">
+                <mat-label class="input-label">% OF TIME</mat-label>
+                <input 
+                    matInput class="base-input" [class.input-error]="data[0].percent > 100 || data[0].percent < 0"
+                    [(ngModel)]="data[0].percent" (ngModelChange)="total_airflow_error = false;negative_value_error=false">
+                <mat-error *ngIf="data[0].percent > 100">Value must be lower or equal to 100</mat-error>
+                <mat-error *ngIf="data[0].percent < 0">Value must be grater than zero</mat-error>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="divider"></div>
+    <mat-grid-list cols="12" rowHeight="72px">
+        <mat-grid-tile [colspan]="2">
+            <div class="position">
+                2
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="5">
+            <div class="input-container">
+                <mat-label class="input-label">AIRFLOW</mat-label>
+                <input matInput  class="input-airflow" [(ngModel)]="data[1].flow">
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="5">
+            <div class="input-container">
+                <mat-label class="input-label">% OF TIME</mat-label>
+                <input matInput class="base-input" [class.input-error]="data[1].percent > 100 || data[1].percent < 0"
+                [(ngModel)]="data[1].percent" (ngModelChange)="total_airflow_error = false;negative_value_error=false">
+                <mat-error *ngIf="data[1].percent > 100">Value must be lower or equal to 100</mat-error>
+                <mat-error *ngIf="data[1].percent < 0">Value must be grater than zero</mat-error>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="divider"></div>
+    <mat-grid-list cols="12" rowHeight="72px">
+        <mat-grid-tile [colspan]="2">
+            <div class="position">
+                3
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="5">
+            <div class="input-container">
+                <mat-label class="input-label">AIRFLOW</mat-label>
+                <input matInput  class="input-airflow" [(ngModel)]="data[2].flow">
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="5">
+            <div class="input-container">
+                <mat-label class="input-label">% OF TIME</mat-label>
+                <input matInput class="base-input" [class.input-error]="data[2].percent > 100 || data[2].percent < 0"
+                [(ngModel)]="data[2].percent" (ngModelChange)="total_airflow_error = false;negative_value_error=false">
+                <mat-error *ngIf="data[2].percent > 100">Value must be lower or equal to 100</mat-error>
+                <mat-error *ngIf="data[2].percent < 0">Value must be grater than zero</mat-error>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="divider"></div>
+    <mat-grid-list cols="12" rowHeight="72px">
+        <mat-grid-tile [colspan]="2">
+            <div class="position">
+                4
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="5">
+            <div class="input-container">
+                <mat-label class="input-label">AIRFLOW</mat-label>
+                <input matInput  class="input-airflow" [(ngModel)]="data[3].flow">
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="5">
+            <div class="input-container">
+                <mat-label class="input-label">% OF TIME</mat-label>
+                <input matInput class="base-input" [class.input-error]="data[3].percent > 100 || data[3].percent < 0"
+                [(ngModel)]="data[3].percent" (ngModelChange)="total_airflow_error = false;negative_value_error=false">
+                <mat-error *ngIf="data[3].percent > 100">Value must be lower or equal to 100</mat-error>
+                <mat-error *ngIf="data[3].percent < 0">Value must be grater than zero</mat-error>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="divider"></div>
+    <h6 *ngIf="total_airflow_error" class="error-message"> The sum of percent times must be equal to 100 </h6>
+    <h6 *ngIf="negative_value_error" class="error-message"> None of percent times can be lower than zero </h6>
+    <div class="divider"></div>
+    <br>
+    <button class="button-primary" (click)="done()">
+        DONE
+    </button>
+</div>

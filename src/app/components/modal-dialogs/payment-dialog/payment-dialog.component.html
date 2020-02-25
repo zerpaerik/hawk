@@ -1,0 +1,52 @@
+<h4 class="title color-secondary"> {{ data.name }} PLAN SUBSCRIPTION </h4>
+<h6> PAYMENT CARD </h6>
+<mat-accordion>
+    <mat-expansion-panel 
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        PAYMENT METHOD
+      </mat-panel-title>
+      <mat-panel-description *ngIf="payment_selected">
+        CARD NUMBER &nbsp; <b> **** **** **** {{ payment_selected.last4 }}</b>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    
+    <mat-selection-list #payments>
+        <mat-list-option 
+            *ngFor="let payment of payment_methods; let i = index" 
+            [value]="payment"
+            [selected]="payment.is_default">
+           {{ payment.brand }} number **** **** ****  {{ payment.last4 }}
+        </mat-list-option>
+        </mat-selection-list>
+
+  </mat-expansion-panel>
+</mat-accordion>
+<h6> PAYMENT INFORMATION DETAILS </h6>
+<mat-card class="details">
+    <mat-list>
+        <mat-list-item>
+            <p> PLAN SUBSCRIPTION NAME  <span> {{ data.name }} </span></p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <p> PLAN SUBSCRIPTION DETAILS  <span> {{ data.description }} </span></p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <p> SUBSCRIPTION COST  <span> {{ data.cost }} $ </span></p>
+        </mat-list-item>
+    </mat-list>
+</mat-card>
+
+<mat-grid-list cols="11">
+    <mat-grid-tile [colspan]="5">
+        <button mat-stroked-button class="button-outline" (click)="cancel()">CANCEL</button>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1"></mat-grid-tile>
+    <mat-grid-tile [colspan]="5">
+        <button mat-stroked-button class="button-primary" (click)="pay()">PAY {{ data.cost }} $</button>
+    </mat-grid-tile>
+</mat-grid-list>

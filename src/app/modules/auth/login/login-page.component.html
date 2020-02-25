@@ -1,0 +1,27 @@
+<div class="auth-content">
+    <!-- <img src=""> -->
+    <div class="auth-card">
+        <img src="../../../../assets/imgs/header-iamge1.png">
+        <div class="auth-form">
+            <h3> Login </h3>
+            <input class="base-input" [(ngModel)]="loginData.email" type="text" placeholder="USERNAME"
+                (ngModelChange)="log_error = ''">
+            <br><br>
+            <div class="input-password">
+                <input class="base-input" [(ngModel)]="loginData.password" [type]="hide ? 'password' : 'text'"
+                    placeholder="PASSWORD" (ngModelChange)="log_error = ''">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </div>
+            <p class="link" (click)="_recoverPassword()"> Forgot password ? </p>
+            <p class="label-error"> {{ log_error }} </p>
+            <button mat-stroked-button class="auth-button button-primary" (click)="_doLogin()"
+                [disabled]="loginData.email == '' ||  loginData.password==''"> LOGIN
+            </button>
+            <p class="footer-comment"> Don't have an account yet? <span (click)="_goRegister()"> Create an account
+                </span> </p>
+        </div>
+    </div>
+</div>

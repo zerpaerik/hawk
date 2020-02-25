@@ -1,0 +1,93 @@
+<div class="main-content">
+    <div class="content-header">
+        <mat-icon *ngIf="new_case" (click)="cancelNewCase();">arrow_back_ios</mat-icon>
+        <h3 *ngIf="!edit"> {{ new_case ? 'NEW CASE' : 'CASE OF STUDY' }} </h3>
+        <h3 *ngIf="edit"> {{ case_data.name }} </h3>
+        <button *ngIf="!new_case" mat-stroked-button class="button-primary" (click)="new_case = true"> NEW
+            CASE
+        </button>
+    </div>
+    <div class="searchbar-container" *ngIf="!new_case">
+        <input type="text" placeholder="Search study case" name="search" [ngModel]="search"
+            (ngModelChange)="search=$event" [formControl]="searchedWordsControl">
+        <mat-icon>search</mat-icon>
+    </div>
+
+    <mat-grid-list [cols]="num_cols" style="height: auto;" *ngIf="!new_case">
+        <mat-grid-tile *ngFor="let case of cases; let i = index" [colspan]="1" [rowspan]="1">
+            <div class="case-card">
+                <button mat-icon-button color="dark" 
+                    class="button-card-top-left" 
+                    (click)="cases[i].toggle_chart = !cases[i].toggle_chart">
+                    <mat-icon *ngIf="!cases[i].toggle_chart" class="color-secondary">bar_chart</mat-icon>
+                    <mat-icon class="rotate" *ngIf="cases[i].toggle_chart">flip_to_front</mat-icon>
+                </button>
+                <div class="case-card-chart-container" *ngIf="case.toggle_chart">
+                    <h6> Using {{ case.model_filter_name | titleSentence }} </h6>
+                    <app-bar-chart 
+                        [chart_id]="'bar_chart' + case.id"
+                        [current_cost]="case.current_filter.change_rate_annual_cost"
+                        [optimized_cost]="case.current_filter.optimize_change_rate_annual_cost"
+                        [selected_cost]="null">
+                    </app-bar-chart>
+                    <div class="case-chart-legend">
+                        <p> <mat-icon class="color-secondary">stop</mat-icon> Current cost <span> &nbsp;&nbsp; {{ (case.current_filter.change_rate_annual_cost).toFixed(2) }} $</span> </p>
+                        <p> <mat-icon class="color-primary">stop</mat-icon> Optimal cost <span> &nbsp;&nbsp; {{ case.current_filter.optimize_change_rate_annual_cost.toFixed(2) }} $</span> </p>
+                        <p> <mat-icon class="color-third">stop</mat-icon> Savings <span> &nbsp;&nbsp; {{ (case.current_filter.change_rate_annual_cost - case.current_filter.optimize_change_rate_annual_cost).toFixed(2) }} $ </span> </p>
+                    </div>
+                </div>
+                
+                    <p *ngIf="case.client_user_case && !case.toggle_chart"> CASE #
+                        <span appHighlight [searchedWords]="searchedWords$ | async" classToApply="selected-text" text="{{ case.client_user_case }}"></span> 
+                    </p>
+                    <p *ngIf="!case.client_user_case && !case.toggle_chart"> <span> NO CASE NUMBER </span> </p>
+                    <h5 appHighlight [searchedWords]="searchedWords$ | async" classToApply="selected-text"
+                        text="{{ case.name | uppercase }}">
+                    </h5>
+                    <!-- <p appHighlight [searchedWords]="searchedWords$ | async" classToApply="selected-text"
+                    text="Filter change date: 12 12/2020"></p> -->
+                    <img src="{{ case.model_filter_image }}" *ngIf="!case.toggle_chart">
+                    <h6 *ngIf="!case.toggle_chart" appHighlight [searchedWords]="searchedWords$ | async" classToApply="selected-text"
+                        text="{{ case.model_filter_name | titleSentence }}">
+                    </h6>
+                    <h6 
+                        *ngIf="case.client_contact_name !== ''&& !case.toggle_chart"
+                        appHighlight [searchedWords]="searchedWords$ | async" classToApply="selected-text"
+                        text="CLIENT :  {{ case.client_contact_name | titleSentence | uppercase}}">
+                    </h6>
+                    <mat-divider *ngIf="!case.toggle_chart"></mat-divider>
+                    <mat-card-actions *ngIf="!case.toggle_chart">
+                        <button mat-button (click)="_viewOptimization(case)"> VIEW OPTIMIZATION</button>
+                        <button mat-button (click)="_editCase(case)">VIEW DETAILS</button>
+                    </mat-card-actions>
+                    <button mat-icon-button color="dark" class="more" *ngIf="!case.toggle_chart" [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="_editCase(case)">
+                            <span>Edit</span>
+                        </button>
+                        <button mat-menu-item>
+                            <span>Eliminate</span>
+                        </button>
+                        <button mat-menu-item (click)="_duplicateCase(case)">
+                            <span>Duplicate</span>
+                        </button>
+                        <button mat-menu-item>
+                            <span>Compare</span>
+                        </button>
+                        <button mat-menu-item disabled>
+                            <span>Pair instrument</span>
+                        </button>
+                        <button mat-menu-item>
+                            <span>Optimize</span>
+                        </button>
+                    </mat-menu>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <br>
+</div>
+<app-new-case *ngIf="new_case" [filter]="new_case_filter" [edition]="edit" [case_data]="case_data"
+    (cancel)="cancelNewCase()" (created)="_refresCaseList()">
+</app-new-case>

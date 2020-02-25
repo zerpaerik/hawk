@@ -1,0 +1,35 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 100%;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+.auth-card{
+height: 440px;
+
+img{
+  height: 25% !important;
+}
+}
+.auth-form{
+position: absolute;
+margin-top: 30% !important;
+width: 80%;
+margin-left: 10%;
+}
